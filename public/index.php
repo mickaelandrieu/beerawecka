@@ -8,7 +8,6 @@
 define('ENV', 'development');
 define('FCPATH', dirname(__FILE__) . '/');
 define('APPPATH', realpath(FCPATH . '../app') . '/');
-define('LIBPATH', realpath(FCPATH . '../vendor') . '/');
 
 /**
  * -----------------------------------------------------------------------------
