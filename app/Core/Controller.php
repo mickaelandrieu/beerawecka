@@ -15,58 +15,8 @@ namespace App\Core;
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-class Controller
+class Controller extends \Sys\Core\Controller
 {
-
-    /**
-     * @var \App\Core\Loader 
-     */
-    public $load;
-
-    /**
-     * @var \App\Core\Input
-     */
-    public $input;
-    
-    /**
-     * @var \App\Core\Output
-     */
-    public $output;
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Save the controller instance
-     * Get saved objects
-     * Autoload helpers
-     */
-    public function __construct()
-    {
-        foreach (Services::all() as $name => $obj)
-        {
-            $this->{$name} = $obj;
-        }
-        $this->_autoload();
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Autoload helpers
-     */
-    protected function _autoload()
-    {
-        $autoload = $this->load->config('autoload');
-
-        if (isset($autoload['helpers']))
-        {
-            foreach ($autoload['helpers'] as $file)
-            {
-                $this->load->helper($file);
-            }
-        }
-    }
-
     // -------------------------------------------------------------------------
 }
 

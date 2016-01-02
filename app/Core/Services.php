@@ -15,50 +15,8 @@ namespace App\Core;
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-class Services
+class Services extends \Sys\Core\Services
 {
-    /**
-     * @var array
-     */
-    private static $services = [];
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Save an object
-     * 
-     * @param string $name
-     * @param mixed $object
-     */
-    public static function add($name, $object)
-    {
-        self::$services[$name] = $object;
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Get a saved object
-     * 
-     * @return mixed
-     */
-    public static function get($name)
-    {
-        return isset(self::$services[$name]) ? self::$services[$name] : NULL;
-    }
-    
-    // -------------------------------------------------------------------------
-    
-    /**
-     * Get a saved object
-     * 
-     * @return array
-     */
-    public static function all()
-    {
-        return self::$services;
-    }
-    
     // -------------------------------------------------------------------------
 }
 

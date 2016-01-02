@@ -9,14 +9,6 @@
 
 $routes = [];
 
-$routes['wildcards'] = [
-    ':all'  => '.*',
-    ':any'  => '.+',
-    ':num'  => '-?[0-9]+',
-    ':hex'  => '[A-Fa-f0-9]+',
-    ':uuid' => '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
-];
-
 $routes['default']   = 'welcome';
 $routes['not_found'] = 'welcome/not_found';
 
