@@ -15,7 +15,7 @@ define('LIBPATH', realpath(FCPATH . '../vendor') . '/');
  * BOOTSTRAP
  * -----------------------------------------------------------------------------
  */
-require_once APPPATH . 'constants.php';
+require_once APPPATH . 'config/constants.php';
 require_once LIBPATH . 'autoload.php';
 App\Core\Beerawecka::run();
 
