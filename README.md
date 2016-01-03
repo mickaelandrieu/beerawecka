@@ -1,10 +1,24 @@
 # Beerawecka
 
-Beerawecka is a PHP MVC micro-framework
+Beerawecka is a PHP micro-framework that helps you to start powerful
+web application with a very small footprint.
+
+Beerawecka invokes an appropriate **controller method** from an HTTP request
+and returns an HTTP response.
+
+You don't always need an overkill solution like Symphony or other great projets.
+Beerawecka only provides a minimal set of functionnalities to help you to write
+fast web developpement.
+
+You are free to use your favourite libraries to create your models and views, 
+connecting your application to database, sending emails, etc.
+
+You can have a look to our other project called
+[Bredala](https://github.com/sugatasei/bredala) which offers you some of
+those functionnalities.
 
 ## Features
 
-- Model-View-Controller based system
 - Powerful, light weight and easily customisable
 - Dynamic and regex based routing
 - Calling application via the URL or via the command-line-interface (CLI)
@@ -66,3 +80,20 @@ the running errors only.
 ### Test your installation
 
 Simply call your website with your favourite browser.
+
+## Documentation
+
+### URI Routing
+
+### Controller
+
+### Loader class
+
+### Input class
+
+### Output class
+
+### Services : A dependency container
+
+### Extending Core Class
+
