@@ -30,7 +30,7 @@ To get Beerawecka you can :
 Navigate to your project on a terminal prompt, then run `composer install`.
 
 *__Tip__: You can use the option `-o` while installing/updating composer to get a faster autoloader.*    
-*This command convert PSR-0/4 autoloading to classmap. This is recommended especially for production.*
+*This command converts PSR-0/4 autoloading to classmap. This is recommended especially for production.*
 
 ### Configure your webserver 
 
@@ -49,19 +49,19 @@ By default, an application has the following structure :
 
 You should set your document root to the `public/` folder and your default index to `index.php`.
 
-For the best security, all folders, excepted the `public/` folder,
+For the best security, all folders, except the `public/` folder,
 should be placed above web root so that they are not directly accessible via a browser.
 
-If you change this structure edit the constants includes in the `public/index.php` file.
+If you change this structure, edit the constants includes in the `public/index.php` file.
 
 ### Configure your application
 
 Open the `app/config/config.php` file with your favourite editor and follow
 the instructions inside that file.
 
-In production environnements change the `ENV` constant defined
-in in the `public/index.php` file to hide errors to the user and to report only
-the running errors.
+In production environnements, change the `ENV` constant defined
+in the `public/index.php` file to hide errors to the user and to report
+the running errors only.
 
 ### Test your installation
 
