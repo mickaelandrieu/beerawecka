@@ -53,7 +53,7 @@ abstract class Input
      * @var string
      */
     protected $ip = NULL;
-    
+
     /**
      * Default IP
      * 
@@ -81,9 +81,11 @@ abstract class Input
      * @var array
      */
     protected $config = [
-        'base_url'  => '',
-        'uri_chars' => 'a-z 0-9~%.:_\-',
-        'proxy_ips' => []
+        'base_url'   => '',
+        'index_page' => 'index.php',
+        'url_suffix' => '',
+        'uri_chars'  => 'a-z 0-9~%.:_\-/',
+        'proxy_ips'  => []
     ];
 
     /**
@@ -433,12 +435,11 @@ abstract class Input
     // -------------------------------------------------------------------------
 
     /**
-     * Returns the url of the application
+     * Returns the site base URL without the index_page and url_suffix
      * 
-     * @param string $uri
      * @return string
      */
-    public function url($uri = '')
+    public function base_url($uri = '')
     {
         // First call
         if (!$this->config['base_url'])
@@ -454,15 +455,29 @@ abstract class Input
     // -------------------------------------------------------------------------
 
     /**
-     * Get current url
+     * Returns the site URL including the index_page and url_suffix
+     * 
+     * @param string $uri
+     * @return string
+     */
+    public function site_url($uri = '')
+    {
+        return $this->base_url($this->config['index_page'] . '/' . $uri . $this->config['url_suffix']);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Returns the full URL of the page being currently viewed
      *
      * @return string
      */
     public function current_url()
     {
-        return $this->url($this->uri());
+        return $this->site_url($this->uri());
     }
 
+    // -------------------------------------------------------------------------
     // -------------------------------------------------------------------------
 
     /**
