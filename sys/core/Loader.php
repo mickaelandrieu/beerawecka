@@ -43,10 +43,10 @@ abstract class Loader
             $path = APPPATH . 'config/';
             $file = $name . '.php';
 
-            $global = $this->get_config($path . $file);
-            $local  = $this->get_config($path . ENV . '/' . $file);
+            $app = $this->get_config($path . $file);
+            $env = $this->get_config($path . ENV . '/' . $file);
 
-            $this->config[$name] = $local + $global;
+            $this->config[$name] = $env + $app;
         }
 
         if ($key)
@@ -55,6 +55,27 @@ abstract class Loader
         }
 
         return $this->config[$name];
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Get params from an array inside a file
+     * 
+     * @param string $name
+     * @param string $key
+     * @return array
+     */
+    public function params($name, $key = NULL)
+    {
+        $params = $this->get_config($name . '.php');
+
+        if ($key)
+        {
+            return isset($params[$key]) ? $params[$key] : NULL;
+        }
+
+        return $params;
     }
 
     // -------------------------------------------------------------------------
@@ -69,7 +90,7 @@ abstract class Loader
     {
         return $this->file(APPPATH . 'helpers/' . $name);
     }
-    
+
     // -------------------------------------------------------------------------
 
     /**
