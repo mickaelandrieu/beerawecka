@@ -7,8 +7,9 @@
  * http://creativecommons.org/licenses/by/4.0/.
  */
 
-$autoload          = [];
-$config['helpers'] = [];
+$autoload            = [];
+$autoload['helpers'] = [];
+$autoload['vendor']  = [];
 
 return $autoload;
 

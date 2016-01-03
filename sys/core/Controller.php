@@ -65,6 +65,13 @@ abstract class Controller
                 $this->load->helper($file);
             }
         }
+        if (isset($autoload['vendor']))
+        {
+            foreach ($autoload['vendor'] as $file)
+            {
+                $this->load->vendor($file);
+            }
+        }
     }
 
     // -------------------------------------------------------------------------
