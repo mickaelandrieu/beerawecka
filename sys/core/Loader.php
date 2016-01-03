@@ -36,7 +36,7 @@ abstract class Loader
      * @param string $name
      * @return array
      */
-    public function config($name, $dir = NULL)
+    public function config($name, $key = NULL)
     {
         if (!isset($this->config[$name]))
         {
@@ -47,6 +47,11 @@ abstract class Loader
             $local  = $this->get_config($path . ENV . '/' . $file);
 
             $this->config[$name] = $local + $global;
+        }
+
+        if ($key)
+        {
+            return isset($this->config[$key]) ? $this->config[$key] : NULL;
         }
 
         return $this->config[$name];
@@ -62,7 +67,20 @@ abstract class Loader
      */
     public function helper($name)
     {
-        return $this->file('helpers/' . $name);
+        return $this->file(APPPATH . 'helpers/' . $name);
+    }
+    
+    // -------------------------------------------------------------------------
+
+    /**
+     * Load file from a vendor
+     * 
+     * @param string $name
+     * @return boolean
+     */
+    public function vendor($name)
+    {
+        return $this->file(LIBPATH . $name);
     }
 
     // -------------------------------------------------------------------------
@@ -77,7 +95,7 @@ abstract class Loader
     {
         if (!isset($this->files[$name]))
         {
-            $file = APPPATH . $name . '.php';
+            $file = $name . '.php';
 
             if (($this->files[$name] = is_file($file)))
             {
