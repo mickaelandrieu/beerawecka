@@ -85,7 +85,8 @@ abstract class Input
         'index_page' => 'index.php',
         'url_suffix' => '',
         'uri_chars'  => 'a-z 0-9~%.:_\-/',
-        'proxy_ips'  => []
+        'utf8'       => TRUE,
+        'proxy_ips'  => [],
     ];
 
     /**
@@ -420,7 +421,7 @@ abstract class Input
             $this->uri = $this->is_client ? $this->_parse_argv() : $this->_parse_uri();
 
             // Remove invisible characters
-            $uri = $this->_remove_invisible($this->uri);
+            $this->uri = $this->_remove_invisible($this->uri);
 
             // Removes leading and trailing slash
             $this->uri = trim($this->uri, '/');
@@ -593,8 +594,14 @@ abstract class Input
         {
             return $uri;
         }
+        
+        $regex = "#[^{$this->config['uri_chars']}]#i";
+        
+        if($this->config['utf8']) {
+            $regex .= 'u';
+        }
 
-        return preg_replace("#[^{$this->config['uri_chars']}]+$#iu", "", $uri);
+        return preg_replace($regex, "", $uri);
     }
 
     // -------------------------------------------------------------------------
