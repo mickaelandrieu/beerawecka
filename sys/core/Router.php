@@ -11,6 +11,11 @@ namespace Sys\Core;
 
 /**
  * Router
+ * 
+ * TODO :
+ * HTTP REST
+ * translate _ -> -
+ * callback
  *
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
@@ -24,7 +29,7 @@ abstract class Router
     protected $wildcards = [
         ':all'  => '.*',
         ':any'  => '.+',
-        ':num'  => '-?[0-9]+',
+        ':num'  => '[1-9][0-9]*',
         ':hex'  => '[A-Fa-f0-9]+',
         ':uuid' => '[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}'
     ];
