@@ -27,12 +27,11 @@ class Welcome extends \App\Core\Controller
     /**
      * Default
      * 
-     * http://website.tld/
+     * http://exemple.com/
      */
     public function index()
     {
         $this->output->add(__METHOD__ . PHP_EOL);
-        $this->output->add(print_r(func_get_args(), TRUE));
     }
 
     // -------------------------------------------------------------------------
@@ -40,12 +39,11 @@ class Welcome extends \App\Core\Controller
     /**
      * Custom 404
      * 
-     * http://website.tld/dfnkkdfn
+     * http://exemple.com/file_not_found
      */
     public function not_found()
     {
         $this->output->add(__METHOD__ . PHP_EOL);
-        $this->output->add(print_r(func_get_args(), TRUE));
     }
 
     // -------------------------------------------------------------------------
@@ -53,12 +51,11 @@ class Welcome extends \App\Core\Controller
     /**
      * Auto routing
      * 
-     * http://website.tld/welcome/hello
+     * http://exemple.com/welcome/hello
      */
     public function hello()
     {
         $this->output->add(__METHOD__ . PHP_EOL);
-        $this->output->add(print_r(func_get_args(), TRUE));
     }
 
     // -------------------------------------------------------------------------
@@ -66,12 +63,11 @@ class Welcome extends \App\Core\Controller
     /**
      * Method invisible from the router. Returns 404.
      * 
-     * http://website.tld/welcome/_invisible
+     * http://exemple.com/welcome/_invisible
      */
     public function _invisible()
     {
         $this->output->add(__METHOD__ . PHP_EOL);
-        $this->output->add(print_r(func_get_args(), TRUE));
     }
 
     // -------------------------------------------------------------------------
@@ -79,12 +75,11 @@ class Welcome extends \App\Core\Controller
     /**
      * Static route
      * 
-     * http://website.tld/alias
+     * http://exemple.com/alias
      */
     public function alias()
     {
         $this->output->add(__METHOD__ . PHP_EOL);
-        $this->output->add(print_r(func_get_args(), TRUE));
     }
 
     // -------------------------------------------------------------------------
@@ -92,12 +87,12 @@ class Welcome extends \App\Core\Controller
     /**
      * Dynamic route
      * 
-     * http://website.tld/something
+     * http://exemple.com/regex/something
      */
     public function regex()
     {
         $this->output->add(__METHOD__ . PHP_EOL);
-        $this->output->add(print_r(func_get_args(), TRUE));
+        $this->output->add("Parameters: " . join(', ', func_get_args()));
     }
 
     // -------------------------------------------------------------------------
