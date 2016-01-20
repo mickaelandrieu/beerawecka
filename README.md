@@ -32,8 +32,8 @@ those functionnalities.
 
 ## Documentation
 
-1. [Installation](https://github.com/sugatasei/beerawecka/blob/master/doc/installation.md)
-2. [URI Routing](https://github.com/sugatasei/beerawecka/blob/master/doc/uri-routing.md)
+1. [Installation](https://github.com/sugatasei/beerawecka/blob/master/doc/01-installation.md)
+2. [URI Routing](https://github.com/sugatasei/beerawecka/blob/master/doc/02-uri-routing.md)
 3. Controller
 4. Loading ressources
 5. Input class
