@@ -43,6 +43,7 @@ class Welcome extends \App\Core\Controller
      */
     public function not_found()
     {
+        $this->output->status(404);
         $this->output->add(__METHOD__ . PHP_EOL);
     }
 

@@ -41,13 +41,6 @@ abstract class Input
     protected $is_ajax = NULL;
 
     /**
-     * Is Client Request
-     * 
-     * @var boolean
-     */
-    protected $is_client = NULL;
-
-    /**
      * Client IP
      * 
      * @var string
@@ -116,10 +109,9 @@ abstract class Input
         }
 
         // Client
-        $this->is_client = (php_sapi_name() === 'cli' OR defined('STDIN'));
-
-        if ($this->is_client)
+        if (php_sapi_name() === 'cli' OR defined('STDIN'))
         {
+            $this->method = 'CLI';
             return;
         }
 
@@ -243,7 +235,7 @@ abstract class Input
      */
     public function is_client()
     {
-        return $this->is_client;
+        return $this->method === 'CLI';
     }
 
     // -------------------------------------------------------------------------
