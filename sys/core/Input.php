@@ -410,7 +410,7 @@ abstract class Input
         if ($this->uri === NULL)
         {
             // Parse uri
-            $this->uri = $this->is_client ? $this->_parse_argv() : $this->_parse_uri();
+            $this->uri = $this->is_client() ? $this->_parse_argv() : $this->_parse_uri();
 
             // Remove invisible characters
             $this->uri = $this->_remove_invisible($this->uri);
