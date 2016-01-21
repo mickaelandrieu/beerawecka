@@ -51,9 +51,9 @@ class Welcome extends \App\Core\Controller
     /**
      * Auto routing
      * 
-     * http://exemple.com/welcome/hello
+     * http://exemple.com/welcome/hello-world
      */
-    public function hello()
+    public function hello_world()
     {
         $this->output->add(__METHOD__ . PHP_EOL);
     }

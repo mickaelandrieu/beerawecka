@@ -11,11 +11,6 @@ namespace Sys\Core;
 
 /**
  * Router
- * 
- * TODO :
- * HTTP REST
- * translate _ -> -
- * callback
  *
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
@@ -39,10 +34,21 @@ abstract class Router
      */
     protected $routes = [];
 
+    /**
+     * @var boolean 
+     */
+    protected $dash_to_underscore = TRUE;
+
     // -------------------------------------------------------------------------
 
     public function __construct(array $routes = [])
     {
+        if (isset($routes['dash_to_underscore']))
+        {
+            $this->dash_to_underscore = $routes['dash_to_underscore'];
+            unset($routes['dash_to_underscore']);
+        }
+
         $this->routes = $routes;
     }
 
@@ -87,19 +93,43 @@ abstract class Router
         $method     = 'index';
         $params     = [];
 
+        // Search the controller in the controller directory or in a subfolder
         foreach ($segments as $key => $segment)
         {
             $controller .= '\\' . ucfirst($segment);
 
+            // Convert dash to underscore
+            if ($this->dash_to_underscore)
+            {
+                $controller = str_replace('-', '_', $controller);
+            }
+
+            // The controller is found
             if (class_exists($controller))
             {
+                // A method is found in the url
                 if (isset($segments[$key + 1]))
                 {
                     $method = $segments[$key + 1];
+
+                    // Convert dash to underscore
+                    if ($this->dash_to_underscore)
+                    {
+                        $method = str_replace('-', '_', $method);
+                    }
+
+                    // The method is protected
+                    if (!$method[0] === '_')
+                    {
+                        return FALSE;
+                    }
+
+                    // Get the parameters
                     $params = array_splice($segments, $key + 2);
                 }
 
-                if ($method[0] === '_' || !is_callable([$controller, $method]))
+                // The method is not found or not callable
+                if (!is_callable([$controller, $method]))
                 {
                     return FALSE;
                 }
@@ -108,6 +138,7 @@ abstract class Router
             }
         }
 
+        // Not found
         return FALSE;
     }
 

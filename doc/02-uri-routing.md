@@ -23,7 +23,6 @@ Edit your `.htaccess` file with this rules :
         RewriteRule ^(.*)$ index.php?$1 [L]
     </IfModule>
 
-
 If you have a Nginx server :
 
     # Default
@@ -47,7 +46,7 @@ You can write your own routing rules using regular expressions.
 
 In a route, the array key contains the URI to be matched, while the array value
 contains the destination it should be re-routed to.
-The array key can be an exact uri or a regex expression.
+The array key can be an exact URI or a regex expression.
 
 You can use the following wildcards to build the regex expressions :
 
@@ -68,10 +67,16 @@ Exemples :
 
 ## Reserved routes
 
-    $routes['default']   = 'welcome';
+    $routes['default'] = 'welcome';
 
 This is the default route if th URI contains no data.
 
     $routes['not_found'] = 'welcome/not_found';
 
 This route is used if the router requested controller is not found.
+
+    $routes['dash_to_underscore'] = TRUE;
+
+This is not exactly a route.
+With this option enabled replaces dashes *(-)* with underscores *(_)*
+in the controller and method URI segments.

@@ -9,11 +9,13 @@
 
 $routes = [];
 
-$routes['default']   = 'welcome';
-$routes['not_found'] = 'welcome/not_found';
+$routes['default']            = 'welcome';
+$routes['not_found']          = 'welcome/not_found';
+$routes['dash_to_underscore'] = TRUE;
 
-$routes['alias']     = 'welcome/alias';
-$routes['regex(/:any)'] = 'welcome/regex$1';
+
+$routes['alias']        = 'welcome/alias';
+$routes['regex/(:any)'] = 'welcome/regex/$1';
 
 return $routes;
 
