@@ -1,12 +1,18 @@
 # URI Routing
 
+## Auto routing
+
 By default, an URL string corresponds to a controller class/method.
 The segments in an URI and follow this pattern :
 
     exemple.com/index.php/class/method/param1/param2
 
 If the class is not present in the url, the default route is called.    
-If the method is not present in the url, the default method is *index*
+If the method is not present in the url, the default method is *index*.
+
+The controllers can be organized into sub directories.
+
+    exemple.com/subdir/class/method
 
 ## Removing the index.php file from URL
 
@@ -78,5 +84,5 @@ This route is used if the router requested controller is not found.
     $routes['dash_to_underscore'] = TRUE;
 
 This is not exactly a route.
-With this option enabled replaces dashes *(-)* with underscores *(_)*
-in the controller and method URI segments.
+With this option enabled, the router replaces dashes *(-)*
+with underscores *(_)* in the controller and method URI segments.
