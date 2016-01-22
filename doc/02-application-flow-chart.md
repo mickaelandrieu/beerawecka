@@ -1,4 +1,4 @@
-# Application flow
+# Application flow chart
 
                                             +------------+
     +-----------+        +---------+        |            | +----> +-----------+

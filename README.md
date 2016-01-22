@@ -33,7 +33,7 @@ those functionnalities.
 ## Documentation
 
 1. [Installation](https://github.com/sugatasei/beerawecka/blob/master/doc/01-installation.md)
-2. [Application flow](https://github.com/sugatasei/beerawecka/blob/master/doc/02-application-flow.md)
+2. [Application flow chart](https://github.com/sugatasei/beerawecka/blob/master/doc/02-application-flow-chart.md)
 3. [URI Routing](https://github.com/sugatasei/beerawecka/blob/master/doc/03-uri-routing.md)
 4. [Controller](https://github.com/sugatasei/beerawecka/blob/master/doc/04-controller.md)
 5. Loading ressources
