@@ -60,53 +60,6 @@ abstract class Loader
     // -------------------------------------------------------------------------
 
     /**
-     * Get params from an array inside a file
-     * 
-     * @param string $name
-     * @param string $key
-     * @return array
-     */
-    public function params($name, $key = NULL)
-    {
-        $params = $this->get_config($name . '.php');
-
-        if ($key)
-        {
-            return isset($params[$key]) ? $params[$key] : NULL;
-        }
-
-        return $params;
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Load helper
-     * 
-     * @param string $name
-     * @return boolean
-     */
-    public function helper($name)
-    {
-        return $this->file(APPPATH . 'helpers/' . $name);
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Load file from a vendor
-     * 
-     * @param string $name
-     * @return boolean
-     */
-    public function vendor($name)
-    {
-        return $this->file(LIBPATH . $name);
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
      * Load file
      * 
      * @param type $name

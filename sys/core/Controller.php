@@ -27,7 +27,7 @@ abstract class Controller
      * @var \App\Core\Input
      */
     public $input;
-    
+
     /**
      * @var \App\Core\Output
      */
@@ -45,32 +45,6 @@ abstract class Controller
         foreach (Services::all() as $name => $obj)
         {
             $this->{$name} = $obj;
-        }
-        $this->_autoload();
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Autoload helpers
-     */
-    protected function _autoload()
-    {
-        $autoload = $this->load->config('autoload');
-
-        if (isset($autoload['helpers']))
-        {
-            foreach ($autoload['helpers'] as $file)
-            {
-                $this->load->helper($file);
-            }
-        }
-        if (isset($autoload['vendor']))
-        {
-            foreach ($autoload['vendor'] as $file)
-            {
-                $this->load->vendor($file);
-            }
         }
     }
 
