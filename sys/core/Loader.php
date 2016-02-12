@@ -51,7 +51,7 @@ abstract class Loader
 
         if ($key)
         {
-            return isset($this->config[$key]) ? $this->config[$key] : NULL;
+            return $this->config[$key] ?? NULL;
         }
 
         return $this->config[$name];

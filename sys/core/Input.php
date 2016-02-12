@@ -48,13 +48,6 @@ abstract class Input
     protected $ip = NULL;
 
     /**
-     * Default IP
-     * 
-     * @var string
-     */
-    protected $default_ip = '';
-
-    /**
      * The script was queried through the HTTPS protocol
      * 
      * @var boolean
@@ -80,6 +73,7 @@ abstract class Input
         'uri_chars'  => 'a-z 0-9~%.:_\-/',
         'utf8'       => TRUE,
         'proxy_ips'  => [],
+        'default_ip' => []
     ];
 
     /**
@@ -93,6 +87,9 @@ abstract class Input
     // Initialise
     // -------------------------------------------------------------------------
 
+    /**
+     * @param array $config
+     */
     public function __construct(array $config = [])
     {
         $this->init($config);
@@ -100,6 +97,12 @@ abstract class Input
 
     // -------------------------------------------------------------------------
 
+    /**
+     * Init
+     * 
+     * @param array $config
+     * @return void
+     */
     protected function init(array $config)
     {
         // Default config
@@ -127,7 +130,7 @@ abstract class Input
         {
             $this->params = $_POST + $_GET;
         }
-        elseif ($this->method == "PUT" || $this->method == 'DELETE')
+        elseif ($this->method == "PUT" || $this->method == 'DELETE' || $this->method == 'PATCH')
         {
             parse_str(file_get_contents('php://input'), $this->params);
         }
@@ -140,13 +143,17 @@ abstract class Input
     /**
      * Fetch an item from the SERVER array
      * 
-     * @param string|null $key
+     * @param string|null $name
      * @param mixed $default
      * @return mixed
      */
-    public function server($key = NULL, $default = NULL)
+    public function server($name = NULL, $default = NULL)
     {
-        return isset($_SERVER[$key]) ? $_SERVER[$key] : $default;
+        if ($name)
+        {
+            return $_SERVER[$name] ?? $default;
+        }
+        return $_SERVER;
     }
 
     // -------------------------------------------------------------------------
@@ -154,11 +161,12 @@ abstract class Input
     /**
      * Returns the HTTP method
      * 
-     * @return type
+     * @param bool $upper
+     * @return string
      */
-    public function method()
+    public function method($upper = TRUE): string
     {
-        return $this->method;
+        return $upper ? $this->method : strtolower($this->method);
     }
 
     // -------------------------------------------------------------------------
@@ -168,7 +176,7 @@ abstract class Input
      * 
      * @return bool
      */
-    public function is_get()
+    public function is_get(): bool
     {
         return $this->method === 'GET';
     }
@@ -180,7 +188,7 @@ abstract class Input
      * 
      * @return bool
      */
-    public function is_post()
+    public function is_post(): bool
     {
         return $this->method === 'POST';
     }
@@ -192,7 +200,7 @@ abstract class Input
      * 
      * @return bool
      */
-    public function is_put()
+    public function is_put(): bool
     {
         return $this->method === 'PUT';
     }
@@ -204,7 +212,7 @@ abstract class Input
      * 
      * @return bool
      */
-    public function is_delete()
+    public function is_delete(): bool
     {
         return $this->method === 'DELETE';
     }
@@ -212,11 +220,23 @@ abstract class Input
     // -------------------------------------------------------------------------
 
     /**
+     * Returns if the HTTP request use uses DELETE
+     * 
+     * @return bool
+     */
+    public function is_patch(): bool
+    {
+        return $this->patch === 'DELETE';
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
      * Returns if the request was made from an ajax query
      * 
-     * @return type
+     * @return bool
      */
-    public function is_ajax()
+    public function is_ajax(): bool
     {
         if ($this->is_ajax === NULL)
         {
@@ -231,9 +251,9 @@ abstract class Input
     /**
      * Returns if the request was made from the command line
      * 
-     * @return type
+     * @return bool
      */
-    public function is_client()
+    public function is_client(): bool
     {
         return $this->method === 'CLI';
     }
@@ -245,7 +265,7 @@ abstract class Input
      * 
      * @return bool
      */
-    public function is_secure()
+    public function is_secure(): bool
     {
         // First call
         if ($this->https == NULL)
@@ -264,7 +284,7 @@ abstract class Input
      * 
      * @return string
      */
-    public function ip()
+    public function ip(): string
     {
         // First call
         if ($this->ip === NULL)
@@ -283,7 +303,7 @@ abstract class Input
             // Set a default value if the IP is not valid
             if (!$this->_is_valid_ip($this->ip))
             {
-                $this->ip = $this->default_ip;
+                $this->ip = $this->config['default_ip'];
             }
         }
 
@@ -297,7 +317,7 @@ abstract class Input
      * 
      * @return int
      */
-    public function time()
+    public function time(): int
     {
         if ($this->time === NULL)
         {
@@ -378,7 +398,7 @@ abstract class Input
      * @param string $ip
      * @return bool
      */
-    protected function _proxy_not_valid($ip)
+    protected function _proxy_not_valid($ip): bool
     {
         return !in_array($ip, $this->config['proxy_ips']) && $this->_is_valid_ip($ip);
     }
@@ -392,7 +412,7 @@ abstract class Input
      * 
      * @return string
      */
-    public function protocole()
+    public function protocole(): string
     {
         return $this->is_secure() ? 'https://' : 'http://';
     }
@@ -404,7 +424,7 @@ abstract class Input
      * 
      * @return string
      */
-    public function uri()
+    public function uri(): string
     {
         // First call
         if ($this->uri === NULL)
@@ -432,7 +452,7 @@ abstract class Input
      * 
      * @return string
      */
-    public function base_url($uri = '')
+    public function base_url($uri = ''): string
     {
         // First call
         if (!$this->config['base_url'])
@@ -453,7 +473,7 @@ abstract class Input
      * @param string $uri
      * @return string
      */
-    public function site_url($uri = '')
+    public function site_url($uri = ''): string
     {
         return $this->base_url($this->config['index_page'] . '/' . $uri . $this->config['url_suffix']);
     }
@@ -465,7 +485,7 @@ abstract class Input
      *
      * @return string
      */
-    public function current_url()
+    public function current_url(): string
     {
         return $this->site_url($this->uri());
     }
@@ -477,7 +497,7 @@ abstract class Input
      * 
      * @return string
      */
-    protected function _parse_argv()
+    protected function _parse_argv(): string
     {
         $args = array_slice($_SERVER['argv'], 1);
         return $args ? implode('/', $args) : '';
@@ -493,11 +513,11 @@ abstract class Input
      *
      * @return	string
      */
-    protected function _parse_uri()
+    protected function _parse_uri(): string
     {
         // Gets request uri without query string
         $url = parse_url('http://dummy' . $_SERVER['REQUEST_URI']);
-        $uri = isset($url['path']) ? $url['path'] : '';
+        $uri = $url['path'] ?? '';
 
         // Remove script name
         if (isset($_SERVER['SCRIPT_NAME'][0]))
@@ -530,7 +550,7 @@ abstract class Input
      * @param	string	$uri
      * @return	string
      */
-    protected function _remove_relative_directory($uri)
+    protected function _remove_relative_directory($uri): string
     {
         $uris = array();
         $tok  = strtok($uri, '/');
@@ -558,7 +578,7 @@ abstract class Input
      * @param	bool
      * @return	string
      */
-    protected function _remove_invisible($str)
+    protected function _remove_invisible($str): string
     {
         $count  = 1;
         $remove = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';
@@ -576,20 +596,21 @@ abstract class Input
     /**
      * Remove not allowed characters
      * 
-     * @param type $uri
-     * @return type
+     * @param string $uri
+     * @return string
      */
-    protected function _filter_uri($uri)
+    protected function _filter_uri($uri): string
     {
         // Nothing to do
         if (!$uri || !$this->config['uri_chars'])
         {
             return $uri;
         }
-        
+
         $regex = "#[^{$this->config['uri_chars']}]#i";
-        
-        if($this->config['utf8']) {
+
+        if ($this->config['utf8'])
+        {
             $regex .= 'u';
         }
 
@@ -606,7 +627,7 @@ abstract class Input
      * @param string $name
      * @return bool
      */
-    public function has($name)
+    public function has($name): bool
     {
         return isset($this->params[$name]);
     }
@@ -637,7 +658,7 @@ abstract class Input
      *
      * @return array
      */
-    public function & all()
+    public function & all(): array
     {
         return $this->params;
     }
@@ -651,7 +672,7 @@ abstract class Input
      * @param string $value
      * @return \Bredala\Http\Input
      */
-    public function set($name, $value)
+    public function set($name, $value): self
     {
         $this->params[$name] = $value;
 
@@ -666,7 +687,7 @@ abstract class Input
      * @param string $name
      * @return \Bredala\Http\Input
      */
-    public function delete($name)
+    public function delete($name): self
     {
         if (isset($this->params[$name]))
         {
@@ -683,7 +704,7 @@ abstract class Input
      * 
      * @return int
      */
-    public function count()
+    public function count(): int
     {
         return count($this->params);
     }

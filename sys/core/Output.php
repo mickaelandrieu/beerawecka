@@ -111,7 +111,7 @@ abstract class Output
      * @param string $text
      * @return \Bredala\Http\Output
      */
-    public function status($code, $text = '')
+    public function status($code, $text = ''): self
     {
         is_int($code) OR $code = (int) $code;
 
@@ -134,7 +134,7 @@ abstract class Output
      * @param type $replace
      * @return \Bredala\Http\Output
      */
-    public function header($header, $replace = TRUE)
+    public function header($header, $replace = TRUE): self
     {
         $this->headers[] = [$header, $replace];
 
@@ -150,10 +150,10 @@ abstract class Output
      * @param string $charset
      * @return \Bredala\Http\Output
      */
-    public function content_type($mime, $charset = NULL)
+    public function content_type($mime, $charset = NULL): self
     {
         $header = "Content-Type: ";
-        $header .= isset($this->mimes[$mime][0]) ? $this->mimes[$mime][0] : $mime;
+        $header .= $this->mimes[$mime][0] ?? $mime;
         $header .= $charset ? "; charset=" . $charset : "";
 
         $this->header($header, TRUE);
@@ -169,7 +169,7 @@ abstract class Output
      * @param string $output
      * @return \Bredala\Http\Output
      */
-    public function set($output)
+    public function set($output): self
     {
         $this->output = $output;
 
@@ -184,7 +184,7 @@ abstract class Output
      * @param string $output
      * @return \Bredala\Http\Output
      */
-    public function add($output)
+    public function add($output): self
     {
         $this->output .= $output;
 
@@ -198,7 +198,7 @@ abstract class Output
      * 
      * @return string
      */
-    public function get()
+    public function get(): string
     {
         return $this->output;
     }

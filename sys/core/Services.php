@@ -44,7 +44,7 @@ abstract class Services
      */
     public static function get($name)
     {
-        return isset(self::$services[$name]) ? self::$services[$name] : NULL;
+        return self::$services[$name] ?? NULL;
     }
     
     // -------------------------------------------------------------------------
