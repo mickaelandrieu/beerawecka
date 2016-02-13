@@ -27,7 +27,7 @@ those functionnalities.
 
 ## Requirements
 
-- PHP 5.6 with mbstring module
+- PHP 7 with mbstring module
 - [Composer](https://getcomposer.org/)
 
 ## Documentation
@@ -36,8 +36,8 @@ those functionnalities.
 2. [Application flow chart](https://github.com/sugatasei/beerawecka/blob/master/doc/02-application-flow-chart.md)
 3. [URI Routing](https://github.com/sugatasei/beerawecka/blob/master/doc/03-uri-routing.md)
 4. [Controller](https://github.com/sugatasei/beerawecka/blob/master/doc/04-controller.md)
-5. Loading ressources
-6. Input class
-7. Output class
+5. [Loading ressources](https://github.com/sugatasei/beerawecka/blob/master/doc/05-loading-ressources.md)
+6. [Input class](https://github.com/sugatasei/beerawecka/blob/master/doc/06-input-class.md)
+7. [Output class](https://github.com/sugatasei/beerawecka/blob/master/doc/07-output-class.md)
 8. Services : A dependency container
 9. Extending Core Class
