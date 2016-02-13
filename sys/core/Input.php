@@ -280,6 +280,18 @@ abstract class Input
     // -------------------------------------------------------------------------
 
     /**
+     * Returns the user agent
+     * 
+     * @return string
+     */
+    public function user_agent(): string
+    {
+        return $this->server('HTTP_USER_AGENT', '');
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
      * Fetch the IP Address
      * 
      * @return string
@@ -301,13 +313,27 @@ abstract class Input
             }
 
             // Set a default value if the IP is not valid
-            if (!$this->_is_valid_ip($this->ip))
+            if (!$this->is_valid_ip($this->ip))
             {
                 $this->ip = $this->config['default_ip'];
             }
         }
 
         return $this->ip;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Returns if an ip is valid
+     * 
+     * @param string $ip
+     * @param string $which ipv4 or ipv6
+     * @return bool
+     */
+    public function is_valid_ip($ip)
+    {
+        return (bool) filter_var($ip, FILTER_VALIDATE_IP);
     }
 
     // -------------------------------------------------------------------------
@@ -325,20 +351,6 @@ abstract class Input
         }
 
         return $this->time;
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Returns if an ip is valid
-     * 
-     * @param string $ip
-     * @param string $which ipv4 or ipv6
-     * @return bool
-     */
-    protected function _is_valid_ip($ip)
-    {
-        return (bool) filter_var($ip, FILTER_VALIDATE_IP);
     }
 
     // -------------------------------------------------------------------------
@@ -400,7 +412,7 @@ abstract class Input
      */
     protected function _proxy_not_valid($ip): bool
     {
-        return !in_array($ip, $this->config['proxy_ips']) && $this->_is_valid_ip($ip);
+        return !in_array($ip, $this->config['proxy_ips']) && $this->is_valid_ip($ip);
     }
 
     // -------------------------------------------------------------------------
@@ -440,6 +452,12 @@ abstract class Input
 
             // Filter URI for malicious characters
             $this->uri = $this->_filter_uri($this->uri);
+
+            if ($this->config['url_suffix'])
+            {
+                $suffix    = preg_quote($this->config['url_suffix']);
+                $this->uri = preg_replace("#{$suffix}$#", "", $this->uri);
+            }
         }
 
         return $this->uri;
@@ -475,7 +493,11 @@ abstract class Input
      */
     public function site_url($uri = ''): string
     {
-        return $this->base_url($this->config['index_page'] . '/' . $uri . $this->config['url_suffix']);
+        if ($uri)
+        {
+            $uri = '/' . $uri . $this->config['url_suffix'];
+        }
+        return $this->base_url($this->config['index_page'] . $uri);
     }
 
     // -------------------------------------------------------------------------
