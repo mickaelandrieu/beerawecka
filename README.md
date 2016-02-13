@@ -39,5 +39,5 @@ those functionnalities.
 5. [Loading ressources](https://github.com/sugatasei/beerawecka/blob/master/doc/05-loading-ressources.md)
 6. [Input class](https://github.com/sugatasei/beerawecka/blob/master/doc/06-input-class.md)
 7. [Output class](https://github.com/sugatasei/beerawecka/blob/master/doc/07-output-class.md)
-8. Services : A dependency container
-9. Extending Core Class
+8. [Service container](https://github.com/sugatasei/beerawecka/blob/master/doc/08-service-container.md)
+9. [Extending Core Class](https://github.com/sugatasei/beerawecka/blob/master/doc/09-extending-core-class.md)
