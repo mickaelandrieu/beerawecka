@@ -1,40 +1,41 @@
 # Input class
 
 The `Input` class provides some
-helpers for fetching input data and processing it.
+helpers for fetching request data (like $_GET, $_POST arrays), user informations,
+server data, etc.
 
 This class is initialized automatically by the system
-so there is no need to do it manually. All functionnalities are directly 
+so there is no need to do it manually. All functionnalities are directly
 accessible within the controller:
 
     $this->input->method_name();
 
 ## Configuration
 
-The class constructor accepts the following options:
+The class constructor accepts an array of the following options:
 
 - `base_url`: URL to your website root (with a trailing slash). If this option
-is not set, Beerawecka will try to auto detect the URL using
-`$_SERVER` informations. This option should be set for security.
-- `index_page`: this will be your index.php file, unless you've renamed it to
+is not set, Beerawecka will try to auto detect the `base_url`
+using `$_SERVER` informations. This option should be set for security.
+- `index_page`: this will be your `index.php` file, unless you have renamed it to
 something else. If you are using URL rewriting set this variable to empty.
-Default: `index.php`.
-- `url_suffix`: Allows you to add a suffix to all URLs generated
+Default value: `index.php`.
+- `url_suffix`: Allows you to add a suffix to all generated URLs.
 - `uri_chars`: Specifies which characters are permitted within your URLs.
-Default: `a-z 0-9~%.:_\-/`
-- `utf8`: Defines if PHP working with Unicode data. Default: `TRUE`.
+Default value: `a-z 0-9~%.:_\-/`
+- `utf8`: Defines if PHP is working with unicode data. Default value: `TRUE`.
 - `proxy_ips`: If your web server is behind front servers, you can list
-all proxy ips in this array. This option is important to find the IP address
+all proxy IPs in this array. This option is important to find the IP address
 from which the user is viewing the current page. Default value: `empty`.
 - `default_ip`: The returned value if the user IP is not found or is not valid.
 
 By default, Beerawecka use the configuration file `config.php` to set
-this options on system loading.
+these options on system loading.
 
 ## HTTP request data
 
 The `Input` class comes with helper methods for handling
-GET, PUT, DELETE or PATCH items.
+GET, POST, PUT, DELETE or PATCH items.
 
 The source of this data depends on the current HTTP request method.
 
@@ -46,9 +47,9 @@ The first option is for the data name (like `$_GET('name')`). The second is
 the default value returned if the data is not found.
 
 In the case of POST requests, this function searches for the data
-in the POST stream then in the GET stream.
+in the POST array then in the GET array.
 
-This function can return data by reference using this syntax :
+This function can return data by reference using this syntax:
 
     $my_item = & $this->input->get('my_item');
 
@@ -60,17 +61,17 @@ Returns TRUE if an item exists.
 
 Returns an array of all items.
 
-This function can return data by reference using this syntax :
+This function can return data by reference using this syntax:
 
     $my_items = & $this->input->all();
 
 ### set($name, $value)
 
-Add or update an item.
+Adds or updates an item.
 
 ### delete($name)
 
-Delete an item.
+Deletes an item.
 
 ### count()
 
@@ -84,24 +85,24 @@ Returns the current HTTP protocole (`https://` or `http:://`).
 
 ### uri()
 
-Returns the request URI.
+Returns the requested URI.
 
 ### site_url($uri)
 
-Returns the site URL base on the `base_url` defined in the configuration.
+Returns the site URL based on the `base_url` defined in the configuration.
 
 The `index_page` will be added the `base_url`.
 
-This function add the `$uri` option to the URL, plus the
+This function adds the `$uri` option to the URL, plus the
 `url_suffix` as set in your configuration.
 
 You are encouraged to use this function any time you need
 to generate a local URL so that your pages become more portable
-in the event your URL changes.
+if you change your domain name.
 
 ### base_url($uri)
 
-Returns the site URL base on the `base_url` defined in the configuration.
+Returns the site URL based on the `base_url` defined in the configuration.
 
 This function returns the same string as `site_url` without `index_page` and
 `url_suffix` options.
@@ -118,7 +119,7 @@ Returns the full URL of the page being currently viewed.
 
 Returns server and execution environment informations.
 
-If the first option is not set, returns the `$_SERVER` array.
+If the first option is not set or `NULL`, returns the `$_SERVER` array.
 Else returns an item of the `$_SERVER` array.
 
 The second option is the default value returned if the data is not found. 
@@ -137,12 +138,14 @@ Returns the user agent.
 
 ### ip()
 
-Returns the IP of the current user. Returns the `default_ip` option from the
+Returns the IP of the current user.
+
+Returns the `default_ip` option from the
 configuration if the IP is not found or if the IP is not valid.
 
 ## is_valid_ip($ip)
 
-Returns if an ip is valid.
+Returns `TRUE` if an ip is valid.
 
 ### time()
 

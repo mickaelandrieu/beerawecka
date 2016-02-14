@@ -2,15 +2,15 @@
 
 ## Requirements
 
-- PHP 5.6 with mbstring module
+- PHP 7 with mbstring module
 - [Composer](https://getcomposer.org/)
 
 ## Download
 
-To get Beerawecka you can :
+To get Beerawecka you can:
 
 - Clone this repo `git clone https://github.com/sugatasei/beerawecka.git`
-- [Download the last release](https://github.com/sugatasei/beerawecka/archive/master.zip) and unzip the package.
+- [Download the latest release](https://github.com/sugatasei/beerawecka/archive/master.zip) and unzip the package.
 
 ## Install the autoloader with composer.
 
@@ -21,7 +21,7 @@ Navigate to your project on a terminal prompt, then run `composer install`.
 
 ## Configure your webserver 
 
-By default, an application has the following structure :
+By default, an application has the following structure:
 
     test/
         app/

@@ -7,7 +7,7 @@ Beerawecka invokes an appropriate **controller method** from an HTTP request
 and returns an HTTP response.
 
 You don't always need an overkill solution like Symphony or other great projets.
-Beerawecka only provides a minimal set of functionnalities to help you to write
+Beerawecka only provides a minimal set of functionnalities to help you write
 fast web developpement.
 
 You are free to use your favourite libraries to create your models and views, 
