@@ -1,6 +1,6 @@
 # Beerawecka
 
-Beerawecka is a PHP micro-framework that helps you to start powerful
+Beerawecka is a PHP 7 micro-framework that helps you to start powerful
 web application with a very small footprint.
 
 Beerawecka invokes an appropriate **controller method** from an HTTP request
