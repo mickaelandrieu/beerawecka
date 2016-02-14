@@ -11,7 +11,6 @@ namespace Sys\Core;
 
 use App\Core\Input;
 use App\Core\Output;
-use App\Core\Services;
 use App\Core\Router;
 use App\Core\Loader;
 
@@ -73,9 +72,10 @@ abstract class Beerawecka
         if ($route)
         {
             // Save services
-            Services::add('load', $loader);
-            Services::add('input', $input);
-            Services::add('output', $output);
+            $services = Services::getInstance();
+            $services->set('load', $loader);
+            $services->set('input', $input);
+            $services->set('output', $output);
 
             // Call controller
             list($class, $method, $params) = $route;

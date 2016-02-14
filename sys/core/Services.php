@@ -17,10 +17,44 @@ namespace Sys\Core;
  */
 abstract class Services
 {
+
+    /**
+     * @var $this
+     */
+    private static $instance = null;
+
     /**
      * @var array
      */
-    protected static $services = [];
+    protected $services = [];
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Protected constructor to prevent creating a new instance of the
+     * *Services* via the `new` operator from outside of this class.
+     */
+    protected function __construct()
+    {
+        
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     *  Instance of Services
+     * 
+     * @return $this
+     */
+    public static function getInstance()
+    {
+        if (!isset(self::$instance))
+        {
+            self::$instance = new static();
+        }
+
+        return self::$instance;
+    }
 
     // -------------------------------------------------------------------------
 
@@ -30,35 +64,90 @@ abstract class Services
      * @param string $name
      * @param mixed $object
      */
-    public static function add($name, $object)
+    public function set($name, $object)
     {
-        self::$services[$name] = $object;
+        $this->services[$name] = $object;
+
+        return $this;
     }
 
     // -------------------------------------------------------------------------
 
     /**
-     * Get a saved object
+     * Return if a service is available
+     * 
+     * @param string $name
+     * @return boolean
+     */
+    public function has($name)
+    {
+        return isset($this->services[$name]);
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Return a saved object
      * 
      * @return mixed
      */
-    public static function get($name)
+    public function get($name)
     {
-        return self::$services[$name] ?? NULL;
+        return $this->services[$name] ?? NULL;
     }
-    
+
     // -------------------------------------------------------------------------
-    
+
     /**
-     * Get a saved object
+     * Return all saved objects
      * 
      * @return array
      */
-    public static function all()
+    public function all()
     {
-        return self::$services;
+        return $this->services;
     }
-    
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Delete an item
+     * 
+     * @param string $name
+     * @return $this
+     */
+    public function delete($name)
+    {
+        if (isset($this->services[$name]))
+        {
+            unset($this->services[$name]);
+        }
+
+        return $this;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Private clone method to prevent cloning
+     * of the instance of the *Services* instance.
+     */
+    private function __clone()
+    {
+        
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Private unserialize method to prevent unserializing
+     * of the *Services* instance.
+     */
+    private function __wakeup()
+    {
+        
+    }
+
     // -------------------------------------------------------------------------
 }
 

@@ -42,10 +42,10 @@ abstract class Controller
      */
     public function __construct()
     {
-        foreach (Services::all() as $name => $obj)
-        {
-            $this->{$name} = $obj;
-        }
+        $services     = Services::getInstance();
+        $this->load   = $services->get('load');
+        $this->input  = $services->get('input');
+        $this->output = $services->get('output');
     }
 
     // -------------------------------------------------------------------------
