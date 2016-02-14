@@ -692,7 +692,7 @@ abstract class Input
      *
      * @param string $name
      * @param string $value
-     * @return \Bredala\Http\Input
+     * @return $this
      */
     public function set($name, $value): self
     {
@@ -707,7 +707,7 @@ abstract class Input
      * Delete a param
      *
      * @param string $name
-     * @return \Bredala\Http\Input
+     * @return $this
      */
     public function delete($name): self
     {

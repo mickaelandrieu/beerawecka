@@ -21,46 +21,7 @@ abstract class Output
     /**
      * @var array 
      */
-    protected $status_code = [
-        200 => 'OK',
-        201 => 'Created',
-        202 => 'Accepted',
-        203 => 'Non-Authoritative Information',
-        204 => 'No Content',
-        205 => 'Reset Content',
-        206 => 'Partial Content',
-        300 => 'Multiple Choices',
-        301 => 'Moved Permanently',
-        302 => 'Found',
-        303 => 'See Other',
-        304 => 'Not Modified',
-        305 => 'Use Proxy',
-        307 => 'Temporary Redirect',
-        400 => 'Bad Request',
-        401 => 'Unauthorized',
-        403 => 'Forbidden',
-        404 => 'Not Found',
-        405 => 'Method Not Allowed',
-        406 => 'Not Acceptable',
-        407 => 'Proxy Authentication Required',
-        408 => 'Request Timeout',
-        409 => 'Conflict',
-        410 => 'Gone',
-        411 => 'Length Required',
-        412 => 'Precondition Failed',
-        413 => 'Request Entity Too Large',
-        414 => 'Request-URI Too Long',
-        415 => 'Unsupported Media Type',
-        416 => 'Requested Range Not Satisfiable',
-        417 => 'Expectation Failed',
-        422 => 'Unprocessable Entity',
-        500 => 'Internal Server Error',
-        501 => 'Not Implemented',
-        502 => 'Bad Gateway',
-        503 => 'Service Unavailable',
-        504 => 'Gateway Timeout',
-        505 => 'HTTP Version Not Supported'
-    ];
+    protected $status_code = [];
 
     /**
      * @var array 
@@ -68,9 +29,14 @@ abstract class Output
     protected $mimes = [];
 
     /**
-     * @var array 
+     * @var string 
      */
-    protected $status = [];
+    protected $status = '';
+
+    /**
+     * @var string 
+     */
+    protected $content_type = '';
 
     /**
      * @var array 
@@ -96,9 +62,10 @@ abstract class Output
      * 
      * @param array $mimes
      */
-    public function __construct(array $mimes = [])
+    public function __construct(array $status, array $mimes = [])
     {
-        $this->mimes = $mimes;
+        $this->status = $status;
+        $this->mimes  = $mimes;
         $this->status(200);
     }
 
@@ -108,35 +75,32 @@ abstract class Output
      * Set the server status
      * 
      * @param int $code
-     * @param string $text
-     * @return \Bredala\Http\Output
+     * @param string $msg
+     * @return $this
      */
-    public function status($code, $text = ''): self
+    public function status($code, $msg = ''): self
     {
-        is_int($code) OR $code = (int) $code;
-
-        if (isset($this->status_code[$code]))
+        if (!is_int($code))
         {
-            $text = $this->status_code[$code];
+            $code = (int) $code;
         }
 
-        $this->status = [$code, $text];
+        if (!$code)
+        {
+            $this->status = '';
+            return $this;
+        }
 
-        return $this;
-    }
+        if (!$msg)
+        {
+            $msg = $this->status_code[$code] ?? '';
+        }
 
-    // -------------------------------------------------------------------------
-
-    /**
-     * Set a server header
-     * 
-     * @param type $header
-     * @param type $replace
-     * @return \Bredala\Http\Output
-     */
-    public function header($header, $replace = TRUE): self
-    {
-        $this->headers[] = [$header, $replace];
+        if ($msg)
+        {
+            $protocol     = $_SERVER['SERVER_PROTOCOL'] ?? 'HTTP/1.0';
+            $this->status = $protocol . ' ' . $code . ' ' . $msg;
+        }
 
         return $this;
     }
@@ -148,7 +112,7 @@ abstract class Output
      * 
      * @param string $mime
      * @param string $charset
-     * @return \Bredala\Http\Output
+     * @return $this
      */
     public function content_type($mime, $charset = NULL): self
     {
@@ -156,7 +120,23 @@ abstract class Output
         $header .= $this->mimes[$mime][0] ?? $mime;
         $header .= $charset ? "; charset=" . $charset : "";
 
-        $this->header($header, TRUE);
+        $this->content_type = $header;
+
+        return $this;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * Set a server header
+     * 
+     * @param type $header
+     * @param type $replace
+     * @return $this
+     */
+    public function header($header, $replace = TRUE): self
+    {
+        $this->headers[] = [$header, $replace];
 
         return $this;
     }
@@ -167,7 +147,7 @@ abstract class Output
      * Set the output string
      * 
      * @param string $output
-     * @return \Bredala\Http\Output
+     * @return $this
      */
     public function set($output): self
     {
@@ -179,10 +159,10 @@ abstract class Output
     // -------------------------------------------------------------------------
 
     /**
-     * Append data ont the output string
+     * Append data to the output string
      * 
      * @param string $output
-     * @return \Bredala\Http\Output
+     * @return $this
      */
     public function add($output): self
     {
@@ -210,18 +190,25 @@ abstract class Output
      * 
      * @return void
      */
-    public function display()
+    public function display($send_headers = TRUE)
     {
         if (!$this->get())
         {
             return;
         }
 
-        if (!$this->headers_sent && !headers_sent())
+        if ($send_headers && !$this->headers_sent && !headers_sent())
         {
             $this->headers_sent = TRUE;
 
-            header("Status: " . $this->status[0] . " " . $this->status[1], TRUE);
+            if ($this->status)
+            {
+                header($this->status, TRUE);
+            }
+            if ($this->content_type)
+            {
+                header($this->content_type, TRUE);
+            }
             foreach ($this->headers as $header)
             {
                 header($header[0], $header[1]);
@@ -229,6 +216,7 @@ abstract class Output
         }
 
         echo $this->get();
+        $this->set('');
     }
 
     // -------------------------------------------------------------------------

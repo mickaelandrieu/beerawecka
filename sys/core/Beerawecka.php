@@ -23,12 +23,6 @@ use App\Core\Loader;
  */
 abstract class Beerawecka
 {
-
-    /**
-     * @var \App\Core\Controller 
-     */
-    protected static $instance = NULL;
-
     // -------------------------------------------------------------------------
 
     /**
@@ -70,7 +64,7 @@ abstract class Beerawecka
 
         // Http request
         $input  = new Input($config);
-        $output = new Output($loader->config('types_mimes'));
+        $output = new Output($loader->config('mimes'));
 
         // Get the route
         $router = new Router($loader->config('routes'));
@@ -84,23 +78,13 @@ abstract class Beerawecka
             Services::add('output', $output);
 
             // Call controller
-            list($controller, $method, $params) = $route;
-            self::$instance = new $controller();
-            self::$instance->{$method}(...$params);
+            list($class, $method, $params) = $route;
+            $controller = new $class();
+            $controller->{$method}(...$params);
         }
 
-        $output->display();
+        $output->display(!$input->is_client());
         ob_end_flush();
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * @return \App\Core\Controller 
-     */
-    public static function instance()
-    {
-        return self::$instance;
     }
 
     // -------------------------------------------------------------------------
