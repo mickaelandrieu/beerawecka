@@ -21,7 +21,7 @@ class Welcome extends \App\Core\Controller
     public function __construct()
     {
         parent::__construct();
-        $this->output->content_type('text', 'UTF-8');
+        $this->output->contentType('text', 'UTF-8');
     }
 
     /**

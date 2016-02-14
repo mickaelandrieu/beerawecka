@@ -30,14 +30,14 @@ The default status code is `200`.
 
 You can use a custom message in the second optional parameter.
 
-### content_type($mime, $charset = NULL)
+### contentType($mime, $charset = NULL)
 
 Set the content type.
 
 You have the choice:
 
-1. Give the mime types: `$this->input->content_type('text/css')`
-2. Give a file type: `$this->input->content_type('css')`.
+1. Give the mime types: `$this->input->contentType('text/css')`
+2. Give a file type: `$this->input->contentType('css')`.
 In this example `css` is directly refering to `text/css` defined in the mime types
 configuration file.
 

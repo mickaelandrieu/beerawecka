@@ -75,7 +75,11 @@ Deletes an item.
 
 ### count()
 
-Returns the number of items
+Returns the number of items.
+
+### removeInvisible($str)
+
+Removes invisible characters.
 
 ## Url
 
@@ -87,7 +91,7 @@ Returns the current HTTP protocole (`https://` or `http:://`).
 
 Returns the requested URI.
 
-### site_url($uri)
+### siteUrl($uri)
 
 Returns the site URL based on the `base_url` defined in the configuration.
 
@@ -100,7 +104,7 @@ You are encouraged to use this function any time you need
 to generate a local URL so that your pages become more portable
 if you change your domain name.
 
-### base_url($uri)
+### baseUrl($uri)
 
 Returns the site URL based on the `base_url` defined in the configuration.
 
@@ -109,7 +113,7 @@ This function returns the same string as `site_url` without `index_page` and
 
 This is usefull to create a link to a file, such an image.
 
-### current_url()
+### currentUrl()
 
 Returns the full URL of the page being currently viewed.
 
@@ -124,15 +128,15 @@ Else returns an item of the `$_SERVER` array.
 
 The second option is the default value returned if the data is not found. 
 
-### is_ajax()
+### isAjax()
 
 Returns `TRUE` if the `HTTP_X_REQUESTED_WITH` has been sent.
 
-### is_secure()
+### isSecure()
 
 Returns `TRUE` if the application is called through the HTTPS protocol.
 
-### user_agent()
+### userAgent()
 
 Returns the user agent.
 
@@ -143,7 +147,7 @@ Returns the IP of the current user.
 Returns the `default_ip` option from the
 configuration if the IP is not found or if the IP is not valid.
 
-## is_valid_ip($ip)
+## isValidIP($ip)
 
 Returns `TRUE` if an ip is valid.
 
@@ -161,26 +165,26 @@ with the option to set it in uppercase or lowercase.
 This method returns `CLI` if the application is called from the
 command-line-interface.
 
-### is_get()
+### isGet()
 
 Returns `TRUE` if the HTTP request method is `GET`.
 
-### is_post()
+### isPost()
 
 Returns `TRUE` if the HTTP request method is `POST`.
 
-### is_put()
+### isPut()
 
 Returns `TRUE` if the HTTP request method is `PUT`.
 
-### is_delete()
+### isDelete()
 
 Returns `TRUE` if the HTTP request method is `DELETE`.
 
-### is_patch()
+### isPatch()
 
 Returns `TRUE` if the HTTP request method is `PATCH`.
 
-### is_client()
+### isClient()
 
 Returns `TRUE` if the application is called from the command line interface.

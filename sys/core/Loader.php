@@ -43,8 +43,8 @@ abstract class Loader
             $path = APPPATH . 'config/';
             $file = $name . '.php';
 
-            $app = $this->get_config($path . $file);
-            $env = $this->get_config($path . ENV . '/' . $file);
+            $app = $this->getConfig($path . $file);
+            $env = $this->getConfig($path . ENV . '/' . $file);
 
             $this->config[$name] = $env + $app;
         }
@@ -88,7 +88,7 @@ abstract class Loader
      * @param string $file
      * @return array
      */
-    protected function get_config($file)
+    protected function getConfig($file)
     {
         if (is_file($file))
         {

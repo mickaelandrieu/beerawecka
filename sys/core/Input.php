@@ -176,7 +176,7 @@ abstract class Input
      * 
      * @return bool
      */
-    public function is_get(): bool
+    public function isGet(): bool
     {
         return $this->method === 'GET';
     }
@@ -188,7 +188,7 @@ abstract class Input
      * 
      * @return bool
      */
-    public function is_post(): bool
+    public function isPost(): bool
     {
         return $this->method === 'POST';
     }
@@ -200,7 +200,7 @@ abstract class Input
      * 
      * @return bool
      */
-    public function is_put(): bool
+    public function isPut(): bool
     {
         return $this->method === 'PUT';
     }
@@ -212,7 +212,7 @@ abstract class Input
      * 
      * @return bool
      */
-    public function is_delete(): bool
+    public function isDelete(): bool
     {
         return $this->method === 'DELETE';
     }
@@ -224,7 +224,7 @@ abstract class Input
      * 
      * @return bool
      */
-    public function is_patch(): bool
+    public function isPatch(): bool
     {
         return $this->patch === 'DELETE';
     }
@@ -236,7 +236,7 @@ abstract class Input
      * 
      * @return bool
      */
-    public function is_ajax(): bool
+    public function isAjax(): bool
     {
         if ($this->is_ajax === NULL)
         {
@@ -253,7 +253,7 @@ abstract class Input
      * 
      * @return bool
      */
-    public function is_client(): bool
+    public function isClient(): bool
     {
         return $this->method === 'CLI';
     }
@@ -265,7 +265,7 @@ abstract class Input
      * 
      * @return bool
      */
-    public function is_secure(): bool
+    public function isSecure(): bool
     {
         // First call
         if ($this->https == NULL)
@@ -284,7 +284,7 @@ abstract class Input
      * 
      * @return string
      */
-    public function user_agent(): string
+    public function userAgent(): string
     {
         return $this->server('HTTP_USER_AGENT', '');
     }
@@ -309,11 +309,11 @@ abstract class Input
             // The server is behind a reverse proxy
             else
             {
-                $this->ip = $this->_ip_from_proxy();
+                $this->ip = $this->ipFromProxy();
             }
 
             // Set a default value if the IP is not valid
-            if (!$this->is_valid_ip($this->ip))
+            if (!$this->isValidIP($this->ip))
             {
                 $this->ip = $this->config['default_ip'];
             }
@@ -331,7 +331,7 @@ abstract class Input
      * @param string $which ipv4 or ipv6
      * @return bool
      */
-    public function is_valid_ip($ip)
+    public function isValidIP($ip)
     {
         return (bool) filter_var($ip, FILTER_VALIDATE_IP);
     }
@@ -360,7 +360,7 @@ abstract class Input
      * 
      * @return string|null
      */
-    protected function _ip_from_proxy()
+    protected function ipFromProxy()
     {
         // List of header which is possible to find the client ip
         $headers = [
@@ -385,14 +385,14 @@ abstract class Input
                     foreach ($ipList as $ip)
                     {
                         $ip = str_replace(' ', '', $ip);
-                        if ($this->_proxy_not_valid($ip))
+                        if ($this->proxyNotValid($ip))
                         {
                             return $ip;
                         }
                     }
                 }
                 // A single IP
-                elseif ($this->_proxy_not_valid($ipPossible))
+                elseif ($this->proxyNotValid($ipPossible))
                 {
                     return $ipPossible;
                 }
@@ -410,9 +410,9 @@ abstract class Input
      * @param string $ip
      * @return bool
      */
-    protected function _proxy_not_valid($ip): bool
+    protected function proxyNotValid($ip): bool
     {
-        return !in_array($ip, $this->config['proxy_ips']) && $this->is_valid_ip($ip);
+        return !in_array($ip, $this->config['proxy_ips']) && $this->isValidIP($ip);
     }
 
     // -------------------------------------------------------------------------
@@ -426,7 +426,7 @@ abstract class Input
      */
     public function protocole(): string
     {
-        return $this->is_secure() ? 'https://' : 'http://';
+        return $this->isSecure() ? 'https://' : 'http://';
     }
 
     // -------------------------------------------------------------------------
@@ -442,16 +442,16 @@ abstract class Input
         if ($this->uri === NULL)
         {
             // Parse uri
-            $this->uri = $this->is_client() ? $this->_parse_argv() : $this->_parse_uri();
+            $this->uri = $this->isClient() ? $this->parseArgv() : $this->parseUri();
 
             // Remove invisible characters
-            $this->uri = $this->_remove_invisible($this->uri);
+            $this->uri = $this->removeInvisible($this->uri);
 
             // Removes leading and trailing slash
             $this->uri = trim($this->uri, '/');
 
             // Filter URI for malicious characters
-            $this->uri = $this->_filter_uri($this->uri);
+            $this->uri = $this->filterUri($this->uri);
 
             if ($this->config['url_suffix'])
             {
@@ -470,7 +470,7 @@ abstract class Input
      * 
      * @return string
      */
-    public function base_url($uri = ''): string
+    public function baseUrl($uri = ''): string
     {
         // First call
         if (!$this->config['base_url'])
@@ -491,13 +491,13 @@ abstract class Input
      * @param string $uri
      * @return string
      */
-    public function site_url($uri = ''): string
+    public function siteUrl($uri = ''): string
     {
         if ($uri)
         {
             $uri = '/' . $uri . $this->config['url_suffix'];
         }
-        return $this->base_url($this->config['index_page'] . $uri);
+        return $this->baseUrl($this->config['index_page'] . $uri);
     }
 
     // -------------------------------------------------------------------------
@@ -507,9 +507,9 @@ abstract class Input
      *
      * @return string
      */
-    public function current_url(): string
+    public function currentUrl(): string
     {
-        return $this->site_url($this->uri());
+        return $this->siteUrl($this->uri());
     }
 
     // -------------------------------------------------------------------------
@@ -519,7 +519,7 @@ abstract class Input
      * 
      * @return string
      */
-    protected function _parse_argv(): string
+    protected function parseArgv(): string
     {
         $args = array_slice($_SERVER['argv'], 1);
         return $args ? implode('/', $args) : '';
@@ -535,7 +535,7 @@ abstract class Input
      *
      * @return	string
      */
-    protected function _parse_uri(): string
+    protected function parseUri(): string
     {
         // Gets request uri without query string
         $url = parse_url('http://dummy' . $_SERVER['REQUEST_URI']);
@@ -559,7 +559,7 @@ abstract class Input
             return '/';
         }
 
-        return $this->_remove_relative_directory($uri);
+        return $this->removeRelativeDir($uri);
     }
 
     // -------------------------------------------------------------------------
@@ -572,7 +572,7 @@ abstract class Input
      * @param	string	$uri
      * @return	string
      */
-    protected function _remove_relative_directory($uri): string
+    protected function removeRelativeDir($uri): string
     {
         $uris = array();
         $tok  = strtok($uri, '/');
@@ -591,7 +591,7 @@ abstract class Input
     // -------------------------------------------------------------------------
 
     /**
-     * Remove Invisible Characters
+     * Removes Invisible Characters
      *
      * This prevents sandwiching null characters
      * between ascii characters, like Java\0script.
@@ -600,7 +600,7 @@ abstract class Input
      * @param	bool
      * @return	string
      */
-    protected function _remove_invisible($str): string
+    public function removeInvisible($str): string
     {
         $count  = 1;
         $remove = '/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]+/S';
@@ -621,7 +621,7 @@ abstract class Input
      * @param string $uri
      * @return string
      */
-    protected function _filter_uri($uri): string
+    protected function filterUri($uri): string
     {
         // Nothing to do
         if (!$uri || !$this->config['uri_chars'])

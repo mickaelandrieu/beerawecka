@@ -83,7 +83,7 @@ abstract class Beerawecka
             $controller->{$method}(...$params);
         }
 
-        $output->display(!$input->is_client());
+        $output->display(!$input->isClient());
         ob_end_flush();
     }
 

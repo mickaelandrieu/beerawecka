@@ -63,7 +63,7 @@ abstract class Router
      */
     public function route($uri, $on_error = FALSE)
     {
-        $route = $this->_get_route($this->_parse_uri($uri));
+        $route = $this->getRoute($this->parseUri($uri));
 
         if ($route)
         {
@@ -86,7 +86,7 @@ abstract class Router
      * @param type $uri
      * @return boolean
      */
-    protected function _get_route($uri)
+    protected function getRoute($uri)
     {
         $segments   = explode('/', $uri);
         $controller = 'App\Controllers';
@@ -150,7 +150,7 @@ abstract class Router
      * @param string $uri
      * @return string
      */
-    protected function _parse_uri($uri)
+    protected function parseUri($uri)
     {
         // Default uri
         if (!$uri && isset($this->routes['default']))
@@ -175,7 +175,7 @@ abstract class Router
 
             if (preg_match($pattern, $uri))
             {
-                return $this->_back_reference($pattern, $uri, $route);
+                return $this->backReference($pattern, $uri, $route);
             }
         }
 
@@ -191,7 +191,7 @@ abstract class Router
      * @param string $route
      * @return string
      */
-    protected function _back_reference($pattern, $uri, $route)
+    protected function backReference($pattern, $uri, $route)
     {
         if (strpos($route, '$') !== FALSE && strpos($pattern, '(') !== FALSE)
         {

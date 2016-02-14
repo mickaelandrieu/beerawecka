@@ -64,7 +64,7 @@ abstract class Output
      */
     public function __construct(array $status, array $mimes = [])
     {
-        $this->status = $status;
+        $this->status_code = $status;
         $this->mimes  = $mimes;
         $this->status(200);
     }
@@ -114,7 +114,7 @@ abstract class Output
      * @param string $charset
      * @return $this
      */
-    public function content_type($mime, $charset = NULL): self
+    public function contentType($mime, $charset = NULL): self
     {
         $header = "Content-Type: ";
         $header .= $this->mimes[$mime][0] ?? $mime;
