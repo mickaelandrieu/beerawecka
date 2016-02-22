@@ -67,6 +67,9 @@ abstract class Output
         $this->status_code = $status;
         $this->mimes  = $mimes;
         $this->status(200);
+        
+        // Turn on output buffering
+        ob_start();
     }
 
     // -------------------------------------------------------------------------
@@ -217,6 +220,9 @@ abstract class Output
 
         echo $this->get();
         $this->set('');
+        
+        // Flush the he output buffer and turn off output buffering
+        ob_end_flush();
     }
 
     // -------------------------------------------------------------------------
