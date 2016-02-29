@@ -195,11 +195,6 @@ abstract class Output
      */
     public function display($send_headers = TRUE)
     {
-        if (!$this->get())
-        {
-            return;
-        }
-
         if ($send_headers && !$this->headers_sent && !headers_sent())
         {
             $this->headers_sent = TRUE;
@@ -220,8 +215,8 @@ abstract class Output
 
         echo $this->get();
         $this->set('');
-        
-        // Flush the he output buffer and turn off output buffering
+
+        // Flush the output buffer and turn off output buffering
         ob_end_flush();
     }
 
