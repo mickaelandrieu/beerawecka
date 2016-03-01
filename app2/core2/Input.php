@@ -10,12 +10,13 @@
 namespace App\Core;
 
 /**
- * Output
+ * Input
  *
+ * 
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2015, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-class Output extends \Sys\Core\Output
+class Input extends \Beerawecka\Input
 {
     // -------------------------------------------------------------------------
 }

@@ -10,12 +10,12 @@
 namespace App\Core;
 
 /**
- * Router
- *
+ * Services
+ * 
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-class Router extends \Sys\Core\Router
+class Services extends \Beerawecka\Services
 {
     // -------------------------------------------------------------------------
 }

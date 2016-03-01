@@ -10,13 +10,12 @@
 namespace App\Core;
 
 /**
- * Input
+ * Router
  *
- * 
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
- * @copyright Copyright (c) 2015, Mathieu Froehly <mathieu.froehly@gmail.com>
+ * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-class Input extends \Sys\Core\Input
+class Router extends \Beerawecka\Router
 {
     // -------------------------------------------------------------------------
 }

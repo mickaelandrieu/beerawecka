@@ -7,13 +7,7 @@
  * http://creativecommons.org/licenses/by/4.0/.
  */
 
-namespace Sys\Core;
-
-use App\Core\Input;
-use App\Core\Loader;
-use App\Core\Output;
-use App\Core\Router;
-use App\Core\Services;
+namespace Beerawecka;
 
 /**
  * Beerawecka
@@ -34,8 +28,15 @@ abstract class Beerawecka
         error_reporting(ENV === 'production' ? E_ERROR | E_WARNING | E_PARSE : -1);
         ini_set('display_errors', ENV === 'production' ? 0 : 1);
 
+        // Class names
+        $inputClass    = APPSPACE . '\Input';
+        $loaderClass   = APPSPACE . '\Loader';
+        $outputClass   = APPSPACE . '\Output';
+        $routerClass   = APPSPACE . '\Router';
+        $servicesClass = APPSPACE . '\Services';
+
         // Loader
-        $loader = new Loader();
+        $loader = new $loaderClass();
 
         // Global configuration
         $config = $loader->config('config');
@@ -63,17 +64,17 @@ abstract class Beerawecka
         }
 
         // Http request
-        $input  = new Input($config);
-        $output = new Output($loader->config('mimes'));
+        $input  = new $inputClass($config);
+        $output = new $outputClass($loader->config('mimes'));
 
         // Get the route
-        $router = new Router($loader->config('routes'));
+        $router = new $routerClass($loader->config('routes'));
         $route  = $router->route($input->uri());
 
         if ($route)
         {
             // Save services
-            $services = Services::getInstance();
+            $services = $servicesClass::getInstance();
             $services->set('load', $loader);
             $services->set('input', $input);
             $services->set('output', $output);

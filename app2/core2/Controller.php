@@ -10,12 +10,12 @@
 namespace App\Core;
 
 /**
- * Loader
+ * Controller
  * 
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-class Loader extends \Sys\Core\Loader
+class Controller extends \Beerawecka\Controller
 {
     // -------------------------------------------------------------------------
 }

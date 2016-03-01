@@ -10,12 +10,12 @@
 namespace App\Core;
 
 /**
- * Beerawecka
+ * Output
  *
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
- * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
+ * @copyright Copyright (c) 2015, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-class Beerawecka extends \Sys\Core\Beerawecka
+class Output extends \Beerawecka\Output
 {
     // -------------------------------------------------------------------------
 }

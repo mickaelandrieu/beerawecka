@@ -10,12 +10,12 @@
 namespace App\Core;
 
 /**
- * Controller
- * 
+ * Beerawecka
+ *
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-class Controller extends \Sys\Core\Controller
+class Beerawecka extends \Beerawecka\Beerawecka
 {
     // -------------------------------------------------------------------------
 }

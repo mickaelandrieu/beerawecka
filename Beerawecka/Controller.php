@@ -7,9 +7,7 @@
  * http://creativecommons.org/licenses/by/4.0/.
  */
 
-namespace Sys\Core;
-
-use App\Core\Services;
+namespace Beerawecka;
 
 /**
  * Controller
@@ -21,17 +19,17 @@ abstract class Controller
 {
 
     /**
-     * @var \App\Core\Loader 
+     * @var \App\Loader 
      */
     public $load;
 
     /**
-     * @var \App\Core\Input
+     * @var \App\Input
      */
     public $input;
 
     /**
-     * @var \App\Core\Output
+     * @var \App\Output
      */
     public $output;
 
@@ -44,7 +42,8 @@ abstract class Controller
      */
     public function __construct()
     {
-        $services     = Services::getInstance();
+        $serviceClass = APPSPACE . '\Services';
+        $services     = $serviceClass::getInstance();
         $this->load   = $services->get('load');
         $this->input  = $services->get('input');
         $this->output = $services->get('output');

@@ -10,12 +10,12 @@
 namespace App\Core;
 
 /**
- * Services
+ * Loader
  * 
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-class Services extends \Sys\Core\Services
+class Loader extends \Beerawecka\Loader
 {
     // -------------------------------------------------------------------------
 }

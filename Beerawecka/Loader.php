@@ -7,7 +7,7 @@
  * http://creativecommons.org/licenses/by/4.0/.
  */
 
-namespace Sys\Core;
+namespace Beerawecka;
 
 /**
  * Loader
