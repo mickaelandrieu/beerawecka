@@ -29,11 +29,11 @@ abstract class Beerawecka
         ini_set('display_errors', ENV === 'production' ? 0 : 1);
 
         // Class names
-        $inputClass    = APPSPACE . '\Input';
-        $loaderClass   = APPSPACE . '\Loader';
-        $outputClass   = APPSPACE . '\Output';
-        $routerClass   = APPSPACE . '\Router';
-        $servicesClass = APPSPACE . '\Services';
+        $inputClass    = APPSPACE . '\Core\Input';
+        $loaderClass   = APPSPACE . '\Core\Loader';
+        $outputClass   = APPSPACE . '\Core\Output';
+        $routerClass   = APPSPACE . '\Core\Router';
+        $servicesClass = APPSPACE . '\Core\Services';
 
         // Loader
         $loader = new $loaderClass();

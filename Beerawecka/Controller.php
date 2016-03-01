@@ -42,7 +42,7 @@ abstract class Controller
      */
     public function __construct()
     {
-        $serviceClass = APPSPACE . '\Services';
+        $serviceClass = APPSPACE . '\Core\Services';
         $services     = $serviceClass::getInstance();
         $this->load   = $services->get('load');
         $this->input  = $services->get('input');
