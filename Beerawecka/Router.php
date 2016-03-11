@@ -37,7 +37,7 @@ abstract class Router
     /**
      * @var boolean 
      */
-    protected $dash_to_underscore = TRUE;
+    protected $dash_to_underscore = true;
 
     // -------------------------------------------------------------------------
 
@@ -61,7 +61,7 @@ abstract class Router
      * @param boolean $on_error
      * @return boolean|array
      */
-    public function route($uri, $on_error = FALSE)
+    public function route($uri, $on_error = false)
     {
         $route = $this->getRoute($this->parseUri($uri));
 
@@ -72,10 +72,10 @@ abstract class Router
 
         if (!$on_error && isset($this->routes['not_found']))
         {
-            return $this->route($this->routes['not_found'], TRUE);
+            return $this->route($this->routes['not_found'], true);
         }
 
-        return FALSE;
+        return false;
     }
 
     // -------------------------------------------------------------------------
@@ -121,7 +121,7 @@ abstract class Router
                     // The method is protected
                     if (!$method[0] === '_')
                     {
-                        return FALSE;
+                        return false;
                     }
 
                     // Get the parameters
@@ -131,7 +131,7 @@ abstract class Router
                 // The method is not found or not callable
                 if (!is_callable([$controller, $method]))
                 {
-                    return FALSE;
+                    return false;
                 }
 
                 return [$controller, $method, $params];
@@ -139,7 +139,7 @@ abstract class Router
         }
 
         // Not found
-        return FALSE;
+        return false;
     }
 
     // -------------------------------------------------------------------------
@@ -193,7 +193,7 @@ abstract class Router
      */
     protected function backReference($pattern, $uri, $route)
     {
-        if (strpos($route, '$') !== FALSE && strpos($pattern, '(') !== FALSE)
+        if (strpos($route, '$') !== false && strpos($pattern, '(') !== false)
         {
             $route = preg_replace($pattern, $route, $uri);
         }

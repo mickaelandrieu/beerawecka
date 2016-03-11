@@ -48,7 +48,7 @@ abstract class Output
      * 
      * @var boolean 
      */
-    protected $headers_sent = FALSE;
+    protected $headers_sent = false;
 
     /**
      * @var string 
@@ -117,7 +117,7 @@ abstract class Output
      * @param string $charset
      * @return $this
      */
-    public function contentType($mime, $charset = NULL): self
+    public function contentType($mime, $charset = null): self
     {
         $header = "Content-Type: ";
         $header .= $this->mimes[$mime][0] ?? $mime;
@@ -137,7 +137,7 @@ abstract class Output
      * @param type $replace
      * @return $this
      */
-    public function header($header, $replace = TRUE): self
+    public function header($header, $replace = true): self
     {
         $this->headers[] = [$header, $replace];
 
@@ -193,19 +193,19 @@ abstract class Output
      * 
      * @return void
      */
-    public function display($send_headers = TRUE)
+    public function display($send_headers = true)
     {
         if ($send_headers && !$this->headers_sent && !headers_sent())
         {
-            $this->headers_sent = TRUE;
+            $this->headers_sent = true;
 
             if ($this->status)
             {
-                header($this->status, TRUE);
+                header($this->status, true);
             }
             if ($this->content_type)
             {
-                header($this->content_type, TRUE);
+                header($this->content_type, true);
             }
             foreach ($this->headers as $header)
             {

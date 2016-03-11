@@ -11,7 +11,7 @@ $routes = [];
 
 $routes['default']            = 'welcome';
 $routes['not_found']          = 'welcome/not_found';
-$routes['dash_to_underscore'] = TRUE;
+$routes['dash_to_underscore'] = true;
 
 
 $routes['alias']        = 'welcome/alias';

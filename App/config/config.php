@@ -70,7 +70,7 @@ $config['uri_chars'] = 'a-z 0-9~%.:_\-/';
   | Set up PHP for working with Unicode data
   |
  */
-$config['utf8'] = TRUE;
+$config['utf8'] = true;
 
 /*
   |-----------------------------------------------------------------------------

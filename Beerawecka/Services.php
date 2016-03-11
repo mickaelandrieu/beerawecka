@@ -93,7 +93,7 @@ abstract class Services
      */
     public function get($name)
     {
-        return $this->services[$name] ?? NULL;
+        return $this->services[$name] ?? null;
     }
 
     // -------------------------------------------------------------------------

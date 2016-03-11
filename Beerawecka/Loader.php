@@ -36,7 +36,7 @@ abstract class Loader
      * @param string $name
      * @return array
      */
-    public function config($name, $key = NULL)
+    public function config($name, $key = null)
     {
         if (!isset($this->config[$name]))
         {
@@ -51,7 +51,7 @@ abstract class Loader
 
         if ($key)
         {
-            return $this->config[$key] ?? NULL;
+            return $this->config[$key] ?? null;
         }
 
         return $this->config[$name];

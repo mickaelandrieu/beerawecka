@@ -31,35 +31,35 @@ abstract class Input
      * 
      * @var string
      */
-    protected $method = NULL;
+    protected $method = null;
 
     /**
      * Is Ajax HTTP Request
      * 
      * @var boolean 
      */
-    protected $is_ajax = NULL;
+    protected $is_ajax = null;
 
     /**
      * Client IP
      * 
      * @var string
      */
-    protected $ip = NULL;
+    protected $ip = null;
 
     /**
      * The script was queried through the HTTPS protocol
      * 
      * @var boolean
      */
-    protected $https = NULL;
+    protected $https = null;
 
     /**
      * Input URI string
      * 
      * @var string
      */
-    protected $uri = NULL;
+    protected $uri = null;
 
     /**
      * Preferences
@@ -71,7 +71,7 @@ abstract class Input
         'index_page' => 'index.php',
         'url_suffix' => '',
         'uri_chars'  => 'a-z 0-9~%.:_\-/',
-        'utf8'       => TRUE,
+        'utf8'       => true,
         'proxy_ips'  => [],
         'default_ip' => []
     ];
@@ -81,7 +81,7 @@ abstract class Input
      * 
      * @var int
      */
-    protected $time = NULL;
+    protected $time = null;
 
     // -------------------------------------------------------------------------
     // Initialise
@@ -147,7 +147,7 @@ abstract class Input
      * @param mixed $default
      * @return mixed
      */
-    public function server($name = NULL, $default = NULL)
+    public function server($name = null, $default = null)
     {
         if ($name)
         {
@@ -164,7 +164,7 @@ abstract class Input
      * @param bool $upper
      * @return string
      */
-    public function method($upper = TRUE): string
+    public function method($upper = true): string
     {
         return $upper ? $this->method : strtolower($this->method);
     }
@@ -238,7 +238,7 @@ abstract class Input
      */
     public function isAjax(): bool
     {
-        if ($this->is_ajax === NULL)
+        if ($this->is_ajax === null)
         {
             $this->is_ajax = $this->server('HTTP_X_REQUESTED_WITH') === 'XMLHttpRequest';
         }
@@ -268,7 +268,7 @@ abstract class Input
     public function isSecure(): bool
     {
         // First call
-        if ($this->https == NULL)
+        if ($this->https == null)
         {
             $https       = $this->server('HTTPS', '');
             $this->https = !empty($https) && $https !== 'off';
@@ -299,7 +299,7 @@ abstract class Input
     public function ip(): string
     {
         // First call
-        if ($this->ip === NULL)
+        if ($this->ip === null)
         {
             // Any proxy is defined
             if (empty($this->config['proxy_ips']))
@@ -345,7 +345,7 @@ abstract class Input
      */
     public function time(): int
     {
-        if ($this->time === NULL)
+        if ($this->time === null)
         {
             $this->time = $this->server('REQUEST_TIME', time());
         }
@@ -376,10 +376,10 @@ abstract class Input
             $ipPossible = $this->server($header);
 
             // An IP possible is found
-            if ($ipPossible !== NULL)
+            if ($ipPossible !== null)
             {
                 // An array of IP
-                if (strpos($ipPossible, ',') !== FALSE)
+                if (strpos($ipPossible, ',') !== false)
                 {
                     $ipList = explode(',', $ipPossible);
                     foreach ($ipList as $ip)
@@ -439,7 +439,7 @@ abstract class Input
     public function uri(): string
     {
         // First call
-        if ($this->uri === NULL)
+        if ($this->uri === null)
         {
             // Parse uri
             $this->uri = $this->isClient() ? $this->parseArgv() : $this->parseUri();
@@ -576,7 +576,7 @@ abstract class Input
     {
         $uris = array();
         $tok  = strtok($uri, '/');
-        while ($tok !== FALSE)
+        while ($tok !== false)
         {
             if ((!empty($tok) OR $tok === '0') && $tok !== '..')
             {
@@ -663,7 +663,7 @@ abstract class Input
      * @param string $default
      * @return mixed
      */
-    public function & get($name, $default = NULL)
+    public function & get($name, $default = null)
     {
         if (isset($this->params[$name]))
         {
