@@ -87,7 +87,7 @@ This route is used if the router did not find the route corresponding to the URI
 
 ### Option: URI conversion
 
-    $routes['dash_to_underscore'] = TRUE;
+    $routes['dash_to_underscore'] = true;
 
 This is not exactly a route.
 With this option enabled, the router replaces dashes *(-)*

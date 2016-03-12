@@ -10,12 +10,12 @@
 namespace App\Core;
 
 /**
- * Beerawecka
- *
+ * Config
+ * 
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-class Beerawecka extends \Beerawecka\Beerawecka
+class Config extends \Beerawecka\Config
 {
     // -------------------------------------------------------------------------
 }

@@ -3,11 +3,11 @@
 The `Output` class provides some helpers to send the finalized output
 to the browser.
 
-This class is initialized automatically by the system
+This class is a service initialized automatically by the system 
 so there is no need to do it manually. All functionnalities are directly 
 accessible within the controller:
 
-    $this->output->method_name();
+    $this->get->output()->method_name();
 
 ## Configuration
 
@@ -30,7 +30,7 @@ The default status code is `200`.
 
 You can use a custom message in the second optional parameter.
 
-### contentType($mime, $charset = NULL)
+### contentType($mime, $charset = null)
 
 Set the content type.
 
@@ -43,7 +43,7 @@ configuration file.
 
 The second optional parameter is to set the charset.
 
-### header(header, $replace = TRUE)
+### header(header, $replace = true)
 
 Set a server header.
 
@@ -65,7 +65,7 @@ Append data to the output string.
 
 Get the output string.
 
-### display($send_headers = TRUE)
+### display($send_headers = true)
 
 This function is called automatically by the system after
 the controller method execution.

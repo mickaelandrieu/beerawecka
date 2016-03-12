@@ -3,14 +3,13 @@
 All classes are namespaced. If your installation is complete, composer 
 autoloads all your classes.
 
-The `Loader` class is used to load configuration files
-or files not written in an object oriented format.
+The `Config` class is used to load configuration files.
 
-This class is initialized automatically by the system
+This class is a service initialized automatically by the system 
 so there is no need to do it manually. All functionnalities are directly 
 accessible within the controller:
 
-    $this->load->method_name();
+    $this->get->config();
 
 ## Loading configuration files
 
@@ -29,22 +28,13 @@ by the environnement configuration files.
 
 Use the following function from controller:
 
-    $this->load->config('filename');
+    $this->get->config()->get('filename');
 
 *Do not use the `.php` extension in the filename.*   
 This function returns an empty array if the file is not found.
 
 To retrieve an item from the configuration file:
 
-    $this->load->config('filename', 'item');
+    $this->get->config()->get('filename', 'item');
 
-This function returns `NULL` if the item is not found.
-
-## Loading files
-
-All files are loaded once only.
-Use the following function from the controller:
-
-    $this->load->file('filename');
-
-*Do not use the `.php` extension in the filename.*
+This function returns `null` if the item is not found.

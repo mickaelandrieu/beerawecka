@@ -4,11 +4,11 @@ The `Input` class provides some
 helpers for fetching request data (like $_GET, $_POST arrays), user informations,
 server data, etc.
 
-This class is initialized automatically by the system
-so there is no need to do it manually. All functionnalities are directly
+This class is a service initialized automatically by the system 
+so there is no need to do it manually. All functionnalities are directly 
 accessible within the controller:
 
-    $this->input->method_name();
+    $this->get->input()->method_name();
 
 ## Configuration
 
@@ -23,7 +23,7 @@ Default value: `index.php`.
 - `url_suffix`: Allows you to add a suffix to all generated URLs.
 - `uri_chars`: Specifies which characters are permitted within your URLs.
 Default value: `a-z 0-9~%.:_\-/`
-- `utf8`: Defines if PHP is working with unicode data. Default value: `TRUE`.
+- `utf8`: Defines if PHP is working with unicode data. Default value: `true`.
 - `proxy_ips`: If your web server is behind front servers, you can list
 all proxy IPs in this array. This option is important to find the IP address
 from which the user is viewing the current page. Default value: `empty`.
@@ -39,7 +39,7 @@ GET, POST, PUT, DELETE or PATCH items.
 
 The source of this data depends on the current HTTP request method.
 
-### get($name, $default = NULL)
+### get($name, $default = null)
 
 Returns an item.
 
@@ -51,11 +51,11 @@ in the POST array then in the GET array.
 
 This function can return data by reference using this syntax:
 
-    $my_item = & $this->input->get('my_item');
+    $my_item = & $this->get->input()->get('my_item');
 
 ## has($name)
 
-Returns TRUE if an item exists.
+Returns true if an item exists.
 
 ### all()
 
@@ -63,7 +63,7 @@ Returns an array of all items.
 
 This function can return data by reference using this syntax:
 
-    $my_items = & $this->input->all();
+    $my_items = & $this->get->input()->all();
 
 ### set($name, $value)
 
@@ -119,22 +119,22 @@ Returns the full URL of the page being currently viewed.
 
 ## Server data
 
-### server($name = NULL, $default = NULL)
+### server($name = null, $default = null)
 
 Returns server and execution environment informations.
 
-If the first option is not set or `NULL`, returns the `$_SERVER` array.
+If the first option is not set or `null`, returns the `$_SERVER` array.
 Else returns an item of the `$_SERVER` array.
 
 The second option is the default value returned if the data is not found. 
 
 ### isAjax()
 
-Returns `TRUE` if the `HTTP_X_REQUESTED_WITH` has been sent.
+Returns `true` if the `HTTP_X_REQUESTED_WITH` has been sent.
 
 ### isSecure()
 
-Returns `TRUE` if the application is called through the HTTPS protocol.
+Returns `true` if the application is called through the HTTPS protocol.
 
 ### userAgent()
 
@@ -149,7 +149,7 @@ configuration if the IP is not found or if the IP is not valid.
 
 ## isValidIP($ip)
 
-Returns `TRUE` if an ip is valid.
+Returns `true` if an ip is valid.
 
 ### time()
 
@@ -157,7 +157,7 @@ Returns the request timestamp.
 
 ## HTTP request method
 
-### method($upper = TRUE)
+### method($upper = true)
 
 Returns the HTTP request method (`$_SERVER['REQUEST_METHOD']`),
 with the option to set it in uppercase or lowercase.
@@ -167,24 +167,24 @@ command-line-interface.
 
 ### isGet()
 
-Returns `TRUE` if the HTTP request method is `GET`.
+Returns `true` if the HTTP request method is `GET`.
 
 ### isPost()
 
-Returns `TRUE` if the HTTP request method is `POST`.
+Returns `true` if the HTTP request method is `POST`.
 
 ### isPut()
 
-Returns `TRUE` if the HTTP request method is `PUT`.
+Returns `true` if the HTTP request method is `PUT`.
 
 ### isDelete()
 
-Returns `TRUE` if the HTTP request method is `DELETE`.
+Returns `true` if the HTTP request method is `DELETE`.
 
 ### isPatch()
 
-Returns `TRUE` if the HTTP request method is `PATCH`.
+Returns `true` if the HTTP request method is `PATCH`.
 
 ### isClient()
 
-Returns `TRUE` if the application is called from the command line interface.
+Returns `true` if the application is called from the command line interface.

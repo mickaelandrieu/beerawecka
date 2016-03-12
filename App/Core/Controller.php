@@ -15,8 +15,22 @@ namespace App\Core;
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-class Controller extends \Beerawecka\Controller
+abstract class Controller
 {
+
+    /**
+     *
+     * @var \App\Core\Services 
+     */
+    protected $get;
+
+    // -------------------------------------------------------------------------
+
+    public function __construct()
+    {
+        $this->get = Services::getInstance();
+    }
+
     // -------------------------------------------------------------------------
 }
 

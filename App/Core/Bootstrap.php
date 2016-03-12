@@ -7,15 +7,15 @@
  * http://creativecommons.org/licenses/by/4.0/.
  */
 
-namespace Beerawecka;
+namespace App\Core;
 
 /**
- * Beerawecka
+ * Bootstrap
  *
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-abstract class Beerawecka
+class Bootstrap
 {
     // -------------------------------------------------------------------------
 
@@ -28,18 +28,11 @@ abstract class Beerawecka
         error_reporting(ENV === 'production' ? E_ERROR | E_WARNING | E_PARSE : -1);
         ini_set('display_errors', ENV === 'production' ? 0 : 1);
 
-        // Class names
-        $inputClass    = APPSPACE . '\Core\Input';
-        $loaderClass   = APPSPACE . '\Core\Loader';
-        $outputClass   = APPSPACE . '\Core\Output';
-        $routerClass   = APPSPACE . '\Core\Router';
-        $servicesClass = APPSPACE . '\Core\Services';
-
-        // Loader
-        $loader = new $loaderClass();
+        // Services
+        $services = Services::getInstance();
 
         // Global configuration
-        $config = $loader->config('config');
+        $config = $services->config()->get('config');
 
         // UTF-8 support
         if (isset($config['utf8']) && $config['utf8'])
@@ -63,29 +56,15 @@ abstract class Beerawecka
             setlocale(LC_NUMERIC, 'C');
         }
 
-        // Http request
-        $input  = new $inputClass($config);
-        $output = new $outputClass($loader->config('mimes'));
-
-        // Get the route
-        $router = new $routerClass($loader->config('routes'));
-        $route  = $router->route($input->uri());
-
-        if ($route)
+        // Call controller
+        if (($route = $services->route()))
         {
-            // Save services
-            $services = $servicesClass::getInstance();
-            $services->set('load', $loader);
-            $services->set('input', $input);
-            $services->set('output', $output);
-
-            // Call controller
             list($class, $method, $params) = $route;
             $controller = new $class();
             $controller->{$method}(...$params);
         }
 
-        $output->display(!$input->isClient());
+        $services->output()->display(!$services->input()->isClient());
         ob_end_flush();
     }
 

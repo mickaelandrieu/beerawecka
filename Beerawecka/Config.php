@@ -10,23 +10,18 @@
 namespace Beerawecka;
 
 /**
- * Loader
+ * Config
  * 
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-abstract class Loader
+abstract class Config
 {
 
     /**
      * @var array 
      */
     protected $config = [];
-
-    /**
-     * @var array 
-     */
-    protected $files = [];
 
     // -------------------------------------------------------------------------
 
@@ -36,7 +31,7 @@ abstract class Loader
      * @param string $name
      * @return array
      */
-    public function config($name, $key = null)
+    public function get($name, $key = null)
     {
         if (!isset($this->config[$name]))
         {
@@ -55,29 +50,6 @@ abstract class Loader
         }
 
         return $this->config[$name];
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Load file
-     * 
-     * @param type $name
-     * @return boolean
-     */
-    public function file($name)
-    {
-        if (!isset($this->files[$name]))
-        {
-            $file = $name . '.php';
-
-            if (($this->files[$name] = is_file($file)))
-            {
-                require_once $file;
-            }
-        }
-
-        return $this->files[$name];
     }
 
     // -------------------------------------------------------------------------

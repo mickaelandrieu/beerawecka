@@ -9,7 +9,6 @@ define('ENV', 'development');
 define('FCPATH', dirname(__FILE__) . '/');
 define('APPPATH', realpath(FCPATH . '../app') . '/');
 define('LIBPATH', realpath(FCPATH . '../vendor') . '/');
-define('APPSPACE', 'App');
 
 /**
  * -----------------------------------------------------------------------------
@@ -18,6 +17,6 @@ define('APPSPACE', 'App');
  */
 require_once APPPATH . 'config/constants.php';
 require_once LIBPATH . 'autoload.php';
-App\Core\Beerawecka::run();
+App\Core\Bootstrap::run();
 
 /* End of file */
