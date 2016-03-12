@@ -80,7 +80,7 @@ class Services
     /**
      * @return \App\Core\Config 
      */
-    function config(): Config
+    public function config(): Config
     {
         return $this->config;
     }
@@ -90,7 +90,7 @@ class Services
     /**
      * @return \App\Core\Input 
      */
-    function input(): Input
+    public function input(): Input
     {
         return $this->input;
     }
@@ -100,7 +100,7 @@ class Services
     /**
      * @return \App\Core\Output 
      */
-    function output(): Output
+    public function output(): Output
     {
         return $this->output;
     }
@@ -110,7 +110,7 @@ class Services
     /**
      * @return array
      */
-    function route(): array
+    public function route(): array
     {
         return $this->route;
     }
