@@ -50,6 +50,11 @@ In production environnements, change the `ENV` constant defined
 in the `public/index.php` file to hide errors to the user and to report
 the running errors only.
 
+## Namespace
+
+By default the namespace of the application is `App`. You can change
+this namespace by renaming all namespaces declarations in the app folder.
+
 ## Test your installation
 
 Simply call your website with your favourite browser.
