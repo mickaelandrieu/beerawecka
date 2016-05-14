@@ -15,13 +15,8 @@ namespace App\Core;
  * @author Mathieu Froehly <mathieu.froehly@gmail.com>
  * @copyright Copyright (c) 2016, Mathieu Froehly <mathieu.froehly@gmail.com>
  */
-class Services
+class Services extends \Beerawecka\Services
 {
-
-    /**
-     * @var $this
-     */
-    private static $instance;
 
     /**
      * @var \App\Core\Config 
@@ -51,28 +46,12 @@ class Services
      */
     protected function __construct()
     {
+        parent::__construct();
         $this->config = new Config();
         $this->input  = new Input($this->config->get('config'));
         $this->output = new Output($this->config->get('mimes'));
         $router       = new Router($this->config->get('routes'));
         $this->route  = $router->route($this->input->uri());
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     *  Instance of Services
-     * 
-     * @return $this
-     */
-    public static function getInstance()
-    {
-        if (!isset(self::$instance))
-        {
-            self::$instance = new static();
-        }
-
-        return self::$instance;
     }
 
     // -------------------------------------------------------------------------
@@ -113,28 +92,6 @@ class Services
     public function route(): array
     {
         return $this->route;
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Private clone method to prevent cloning
-     * of the instance of the *Services* instance.
-     */
-    private function __clone()
-    {
-        
-    }
-
-    // -------------------------------------------------------------------------
-
-    /**
-     * Private unserialize method to prevent unserializing
-     * of the *Services* instance.
-     */
-    private function __wakeup()
-    {
-        
     }
 
     // -------------------------------------------------------------------------
