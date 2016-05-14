@@ -8,7 +8,7 @@ This class is a service initialized automatically by the system
 so there is no need to do it manually. All functionnalities are directly 
 accessible within the controller:
 
-    $this->get->input()->method_name();
+    $this->input->method_name();
 
 ## Configuration
 
@@ -51,7 +51,7 @@ in the POST array then in the GET array.
 
 This function can return data by reference using this syntax:
 
-    $my_item = & $this->get->input()->get('my_item');
+    $my_item = & $this->input->get('my_item');
 
 ## has($name)
 
@@ -63,7 +63,7 @@ Returns an array of all items.
 
 This function can return data by reference using this syntax:
 
-    $my_items = & $this->get->input()->all();
+    $my_items = & $this->input->all();
 
 ### set($name, $value)
 

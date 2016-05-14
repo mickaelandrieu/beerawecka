@@ -32,4 +32,4 @@ to the unique instance of this class.
 If you controller extends `App\Core\Controller`,
 you can use the following shortcut:
 
-    $this->get->pdo();
+    $this->services->pdo();

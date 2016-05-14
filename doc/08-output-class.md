@@ -7,7 +7,7 @@ This class is a service initialized automatically by the system
 so there is no need to do it manually. All functionnalities are directly 
 accessible within the controller:
 
-    $this->get->output()->method_name();
+    $this->output->method_name();
 
 ## Configuration
 

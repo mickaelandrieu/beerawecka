@@ -19,16 +19,27 @@ abstract class Controller
 {
 
     /**
-     *
      * @var \App\Core\Services 
      */
-    protected $get;
+    protected $services;
+
+    /**
+     * @var \App\Core\Input 
+     */
+    protected $input;
+
+    /**
+     * @var \App\Core\Output 
+     */
+    protected $output;
 
     // -------------------------------------------------------------------------
 
     public function __construct()
     {
-        $this->get = Services::getInstance();
+        $this->services = Services::getInstance();
+        $this->input    = $this->services->input();
+        $this->output   = $this->services->output();
     }
 
     // -------------------------------------------------------------------------

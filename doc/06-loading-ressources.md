@@ -9,7 +9,7 @@ This class is a service initialized automatically by the system
 so there is no need to do it manually. All functionnalities are directly 
 accessible within the controller:
 
-    $this->get->config();
+    $this->services->config();
 
 ## Loading configuration files
 
@@ -28,13 +28,13 @@ by the environnement configuration files.
 
 Use the following function from controller:
 
-    $this->get->config()->get('filename');
+    $this->services->config()->get('filename');
 
 *Do not use the `.php` extension in the filename.*   
 This function returns an empty array if the file is not found.
 
 To retrieve an item from the configuration file:
 
-    $this->get->config()->get('filename', 'item');
+    $this->services->config()->get('filename', 'item');
 
 This function returns `null` if the item is not found.
