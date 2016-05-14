@@ -2,7 +2,7 @@
     "autoload": {
         "psr-4": {
             "App\\": "app",
-            "Beerawecka\\": "Beerawecka"
+            "Beerawecka\\": "vendor/Beerawecka"
         }
     }
 }
