@@ -22,6 +22,11 @@ class Services
      * @var $this
      */
     private static $instance;
+    
+    /**
+     * @var array
+     */
+    private $services = [];
 
     /**
      * Protected constructor to prevent creating a new instance of the
@@ -30,6 +35,30 @@ class Services
     protected function __construct()
     {
         
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * @param string $name
+     * @param mixed $value
+     * @return $this
+     */
+    public function set($name, $value)
+    {
+        $this->services[$name] = $value;
+        return $this;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * @param string $name
+     * @return mixed
+     */
+    public function get($name)
+    {
+        return $this->services[$name] ?? null;
     }
 
     // -------------------------------------------------------------------------

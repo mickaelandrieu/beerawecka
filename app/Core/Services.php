@@ -17,27 +17,6 @@ namespace App\Core;
  */
 class Services extends \Beerawecka\Services
 {
-
-    /**
-     * @var \App\Core\Config 
-     */
-    protected $config;
-
-    /**
-     * @var \App\Core\Input 
-     */
-    protected $input;
-
-    /**
-     * @var \App\Core\Output 
-     */
-    protected $output;
-
-    /**
-     * @var array
-     */
-    protected $route;
-
     // -------------------------------------------------------------------------
 
     /**
@@ -47,11 +26,12 @@ class Services extends \Beerawecka\Services
     protected function __construct()
     {
         parent::__construct();
-        $this->config = new Config();
-        $this->input  = new Input($this->config->get('config'));
-        $this->output = new Output($this->config->get('mimes'));
-        $router       = new Router($this->config->get('routes'));
-        $this->route  = $router->route($this->input->uri());
+        
+        $config = new Config();
+        
+        $this->set('config', $config);
+        $this->set('input', new Input($config->get('config')));
+        $this->set('output', new Output($config->get('mimes')));
     }
 
     // -------------------------------------------------------------------------
@@ -61,7 +41,7 @@ class Services extends \Beerawecka\Services
      */
     public function config(): Config
     {
-        return $this->config;
+        return $this->get('config');
     }
 
     // -------------------------------------------------------------------------
@@ -71,7 +51,7 @@ class Services extends \Beerawecka\Services
      */
     public function input(): Input
     {
-        return $this->input;
+        return $this->get('input');
     }
 
     // -------------------------------------------------------------------------
@@ -81,7 +61,7 @@ class Services extends \Beerawecka\Services
      */
     public function output(): Output
     {
-        return $this->output;
+        return $this->get('output');
     }
 
     // -------------------------------------------------------------------------
@@ -91,7 +71,8 @@ class Services extends \Beerawecka\Services
      */
     public function route(): array
     {
-        return $this->route;
+        $router = new Router($this->config()->get('routes'));
+        return $router->route($this->input()->uri());
     }
 
     // -------------------------------------------------------------------------
