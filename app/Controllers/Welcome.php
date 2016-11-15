@@ -21,7 +21,7 @@ class Welcome extends \App\Core\Controller
     public function __construct()
     {
         parent::__construct();
-        $this->output->contentType('text', 'UTF-8');
+        $this->output()->contentType('text', 'UTF-8');
     }
 
     /**
@@ -31,7 +31,7 @@ class Welcome extends \App\Core\Controller
      */
     public function index()
     {
-        $this->output->add(__METHOD__ . PHP_EOL);
+        $this->output()->add(__METHOD__ . PHP_EOL);
     }
 
     // -------------------------------------------------------------------------
@@ -43,8 +43,8 @@ class Welcome extends \App\Core\Controller
      */
     public function not_found()
     {
-        $this->output->status(404);
-        $this->output->add(__METHOD__ . PHP_EOL);
+        $this->output()->status(404);
+        $this->output()->add(__METHOD__ . PHP_EOL);
     }
 
     // -------------------------------------------------------------------------
@@ -56,7 +56,7 @@ class Welcome extends \App\Core\Controller
      */
     public function hello_world()
     {
-        $this->output->add(__METHOD__ . PHP_EOL);
+        $this->output()->add(__METHOD__ . PHP_EOL);
     }
 
     // -------------------------------------------------------------------------
@@ -68,7 +68,7 @@ class Welcome extends \App\Core\Controller
      */
     public function _invisible()
     {
-        $this->output->add(__METHOD__ . PHP_EOL);
+        $this->output()->add(__METHOD__ . PHP_EOL);
     }
 
     // -------------------------------------------------------------------------
@@ -80,7 +80,7 @@ class Welcome extends \App\Core\Controller
      */
     public function alias()
     {
-        $this->output->add(__METHOD__ . PHP_EOL);
+        $this->output()->add(__METHOD__ . PHP_EOL);
     }
 
     // -------------------------------------------------------------------------
@@ -92,8 +92,8 @@ class Welcome extends \App\Core\Controller
      */
     public function regex()
     {
-        $this->output->add(__METHOD__ . PHP_EOL);
-        $this->output->add("Parameters: " . join(', ', func_get_args()));
+        $this->output()->add(__METHOD__ . PHP_EOL);
+        $this->output()->add("Parameters: " . join(', ', func_get_args()));
     }
 
     // -------------------------------------------------------------------------

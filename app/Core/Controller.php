@@ -21,25 +21,43 @@ abstract class Controller
     /**
      * @var \App\Core\Services 
      */
-    protected $services;
-
-    /**
-     * @var \App\Core\Input 
-     */
-    protected $input;
-
-    /**
-     * @var \App\Core\Output 
-     */
-    protected $output;
+    private $services;
 
     // -------------------------------------------------------------------------
 
     public function __construct()
     {
         $this->services = Services::getInstance();
-        $this->input    = $this->services->input();
-        $this->output   = $this->services->output();
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * @return \App\Core\Services 
+     */
+    protected function services()
+    {
+        return $this->services;
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * @var \App\Core\Input 
+     */
+    protected function input()
+    {
+        return $this->services->input();
+    }
+
+    // -------------------------------------------------------------------------
+
+    /**
+     * @var \App\Core\Output 
+     */
+    protected function output()
+    {
+        return $this->services->output();
     }
 
     // -------------------------------------------------------------------------
